@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Паспорт</title>
+</head>
+ <style>
+/* === CSS цветовая тема === */
+:root{
+  --accent: #6996b2;       /* основной акцент */
+  --bg: #f4f8fa;           /* фон страницы */
+  --navbg: #ffffff;        /* фон меню */
+  --text: #2F4454;         /* основной текст */
+}
+
+/* === Общие стили страницы === */
+body{
+  font-family: Inter, system-ui, Arial;  /* шрифт */
+  margin: 0;                             /* убираем отступы */
+  background: var(--bg);                 /* цвет фона */
+  color: var(--text);                    /* цвет текста */
+}
+
+/* === Верхняя панель (header) === */
+header{
+  background: var(--navbg);              /* фон шапки */
+  position: sticky; top: 0;              /* зафиксировал сверху */
+  box-shadow: 0 2px 6px rgba(0,0,0,.06); /* легкая тень */
+  z-index: 10;
+}
+
+/* === выравнивание === */
+.container{max-width: 1000px; margin: 0 auto; padding: 12px;}
+
+/* === менюшка === */
+nav{display: flex; gap: 8px; flex-wrap: wrap; align-items: center;}
+nav a{
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 6px;
+}
+nav a.active{background: var(--accent); color: #fff;}
+nav img.logo{height: 32px; border-radius: 4px; margin-right: 6px;}
+
+/* === основа === */
+main{max-width: 1000px; margin: 18px auto; padding: 16px;}
+section{
+  background: #ffffff;                    /* светлый блок */
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #e3e9ef;              /* тонкая рамка вместо тени */
+}
+
+/* === заголовки === */
+h1,h2{margin: 8px 0; color: var(--accent);} /* акцентный цвет */
+
+/* === миниатюры изображений === */
+.thumb{
+  width: 90px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* === табличка === */
+table.sample{
+  width: 100%;
+  border-collapse: collapse;
+}
+table.sample td, table.sample th{
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #fff;
+}
+
+/* === футер снизу === */
+footer{padding: 12px; text-align: center; font-size: .9em; color: #666;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav id="main-nav">
+          <!-- Text and graphic links (open in same window) -->
+          <a href="#home" data-target="home" class="nav-link">Главная</a>
+          <a href="#info1" data-target="info1" class="nav-link">Инфо 1</a>
+          <a href="#info2" data-target="info2" class="nav-link">Инфо 2</a>
+          <a href="#info3" data-target="info3" class="nav-link">Инфо 3</a>
+          <a href="pasport.html">Паспорт</a>
+          <a href="#dom-change" data-target="dom-change" class="nav-link">Изменяем кириллицу</a>
+          <a href="#algo" data-target="algo" class="nav-link">Решение алгоритмики</a>
+          <!-- internal fragment link to a bookmark inside info2 -->
+          <a href="#info2:anchor" data-target="info2:anchor" class="nav-link">Якорь (info2)</a>
+          <!-- external link opening in new window -->
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub (в новом окне)</a>
+        </nav>
+      </div>
+      <div class="small">Вы здесь: <span id="current-location" class="badge">Главная</span></div>
+    </div>
+  </header>
+
+
+<body>
+    <h1>Паспорт</h1>
+    <p></p>
+     <!-- Passport DOM page (second/third pages of passport) -->
+    <section id="passport">
+      <h2>Паспорт — страницы 2 и 3 (демонстрация DOM)</h2>
+      <p>Ниже — имитация второй и третьей страниц паспорта. Вы можете изменить поля (кроме фамилии и имени и года рождения — оставлены для чтения в примерах).</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <h3>Страница 2</h3>
+          <p>Фамилия: <span class="pval">Иванов</span></p>
+          <p>Имя: <span class="pval">Пётр</span></p>
+          <p>Отчество: <span class="pval">Сергеевич</span></p>
+        </div>
+        <div style="flex:1;min-width:300px">
+          <h3>Страница 3</h3>
+          <p>Год рождения: <span class="pval">1995</span></p>
+          <p>Место рождения: <span class="pval">Москва</span></p>
+          <p>Примечание: <span class="pval">—</span></p>
+        </div>
+      </div>
+
+      <h4>Страница "DOM_JS. Считываем информацию из DOM"</h4>
+      <p>Ниже кнопка, которая выполнит код <code>document.getElementsByTagName('p')[2].childNodes[1].innerText</code> и покажет результат.</p>
+      <button id="read-dom">Считать из DOM (пример)</button>
+      <div id="dom-output" style="margin-top:8px;padding:8px;border-radius:6px;background:#fafafa"></div>
+
+      <h4>Скриншот (поместите сюда скрин вашего браузера, сделанный при работе с DevTools)</h4>
+      <p>Замените изображение на реальный скриншот. Сейчас — заполнитель.</p>
+      <img src="https://picsum.photos/seed/screen/600/400" alt="скрин" style="max-width:100%;border:1px solid #ddd;border-radius:6px">
+    </section>
+
+    <a href="index.html" style="font-size: 40px;">Назад на главную</a>
+
+</body>
+
+ <footer class="footer">
+            <div>
+                Телефон: 8(800)555-35-35
+            </div>
+            <div>
+                Email: dkkaliskaia@edu.hse
+            </div>
+        </footer>
+</html>

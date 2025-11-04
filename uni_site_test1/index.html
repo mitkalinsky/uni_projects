@@ -1,44 +1,418 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Сайт Дарьи Калинской</title>
-    <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Учебный сайт — HTML/DOM/JS</title>
+  <style>
+/* === CSS цветовая тема === */
+:root{
+  --accent: #6996b2;       /* основной акцент */
+  --bg: #f4f8fa;           /* фон страницы */
+  --navbg: #ffffff;        /* фон меню */
+  --text: #2F4454;         /* основной текст */
+}
+
+/* === Общие стили страницы === */
+body{
+  font-family: Inter, system-ui, Arial;  /* шрифт */
+  margin: 0;                             /* убирала отступы */
+  background: var(--bg);                 /* цвет фона */
+  color: var(--text);                    /* цвет текста */
+}
+
+/* === Верхняя панель (header) === */
+header{
+  background: var(--navbg);              /* фон шапки */
+  position: sticky; top: 0;              /* зафиксировал сверху */
+  box-shadow: 0 2px 6px rgba(0,0,0,.06); /* легкая тень */
+  z-index: 10;
+}
+
+/* === выравнивание === */
+.container{max-width: 1000px; margin: 0 auto; padding: 12px;}
+
+/* === менюшка === */
+nav{display: flex; gap: 8px; flex-wrap: wrap; align-items: center;}
+nav a{
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 6px;
+}
+
+/* === основа === */
+main{max-width: 1000px; margin: 18px auto; padding: 16px;}
+section{
+  background: #ffffff;                    /* светлый блок */
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #e3e9ef;              /* тонкая рамка вместо тени */
+}
+
+/* === заголовки === */
+h1,h2{margin: 8px 0; color: var(--accent);} /* акцентный цвет */
+
+/* === миниатюры изображений === */
+.thumb{
+  width: 90px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* === табличка === */
+table.sample{
+  width: 100%;
+  border-collapse: collapse;
+}
+table.sample td, table.sample th{
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #fff;
+}
+
+/* === стиль для задачи === */
+#algo form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#algo label {
+  display: flex;
+  flex-direction: column;
+}
+
+#algo input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+/* === футер снизу === */
+footer{padding: 12px; text-align: center; font-size: .9em; color: #666;}
+</style>
 </head>
+ 
+<!--скрипт для задачи--> 
+<script>
+function checkFit() {
+  let a = parseFloat(document.getElementById("a").value);
+  let b = parseFloat(document.getElementById("b").value);
+  let c = parseFloat(document.getElementById("c").value);
+  let d = parseFloat(document.getElementById("d").value);
+
+  // Проверяем два случая: без поворота и с поворотом
+  if ((a <= c && b <= d) || (a <= d && b <= c)) {
+    document.getElementById("algo-result").textContent =
+      "✅ Прямоугольник поместится";
+  } else {
+    document.getElementById("algo-result").textContent =
+      "❌ Прямоугольник НЕ поместится";
+  }
+}
+</script>
+
 <body>
-    <div class="wrapper">
-        <header class="header">
-            <div>
-                Logo
-            </div>
-            <nav class="menu">
-                <a class="menu__item" href="#">Главная</a>
-                <a class="menu__item" href="#">ДЗ</a>
-                <a class="menu__item" href="#">Контакты</a>
-                <a class="menu__item" href="#">Что-то</a>
-            </nav>
-        </header>
-        <main class="main">
-            <section class="about">
-                <h2>Добро пожаловать на сайт Дарьи Калинской</h2>
-                <p>
-                    Здесь я буду постепенно обновлять информацию в соответствии с ДЗ,
-                    но пока тут только тект
-                </p>
-                <p>
-                    Да, я теперь программист
-                </p>
-            </section>
-        </main>
-        <footer class="footer">
-            <div>
-                Телефон: 8(800)555-35-35
-            </div>
-            <div>
-                Email: mimimimi@mail.ru
-            </div>
-        </footer>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav id="main-nav">
+          <!-- Text and graphic links (open in same window) -->
+          <a href="#home" data-target="home" class="nav-link">Главная</a>
+          <a href="#info1" data-target="info1" class="nav-link">Инфо 1</a>
+          <a href="#info2" data-target="info2" class="nav-link">Инфо 2</a>
+          <a href="#info3" data-target="info3" class="nav-link">Инфо 3</a>
+          <a href="pasport.html">Паспорт</a>
+          <a href="#dom-change" data-target="dom-change" class="nav-link">Изменяем кириллицу</a>
+          <a href="#algo" data-target="algo" class="nav-link">Решение алгоритмики</a>
+          <!-- internal fragment link to a bookmark inside info2 -->
+          <a href="#info2:anchor" data-target="info2:anchor" class="nav-link">Якорь (info2)</a>
+          <!-- external link opening in new window -->
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub (в новом окне)</a>
+        </nav>
+      </div>
+      <div class="small">Вы здесь: <span id="current-location" class="badge">Главная</span></div>
     </div>
+  </header>
+
+  <main>
+    <!-- домашняя страница-->
+    <section id="home">
+      <h1>Сайт Дарья Калинская, группа БИСТР242</h1>
+      <p>Тут нет тематики, просто учебный сайт. Позднее будет добавлена тематика</p>
+      <p class="small">Навигация вверху — единая для всех разделов. Внешняя ссылка открывается в новом окне (GitHub).</p>
+      <div class="flex">
+        <div class="column">
+          <h2>Краткое содержание</h2>
+          <ol>
+            <li>Информационные страницы (несколько).</li>
+            <li>Примеры списков, таблиц и изображений.</li>
+            <li>Работа с формами (отправка на удалённый сервер).</li>
+            <li>DOM: считывание и изменение содержимого.</li>
+            <li>Решение алгоритмической задачи.</li>
+          </ol>
+        </div>
+        <div class="column">
+          <h2>Примеры списков</h2>
+          <p>Ненумерованный список:</p>
+          <ul>
+            <li>Пункт A</li>
+            <li>Пункт B
+              <ul>
+                <li>Вложенный 1</li>
+                <li>Вложенный 2</li>
+              </ul>
+            </li>
+            <li>Пункт C</li>
+          </ul>
+          <p>Нумерованный список с вложенным списком:</p>
+          <ol>
+            <li>Шаг 1</li>
+            <li>Шаг 2
+              <ol>
+                <li>Подшаг 2.1</li>
+                <li>Подшаг 2.2</li>
+              </ol>
+            </li>
+            <li>Шаг 3</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- инфо 1 -->
+    <section id="info1">
+      <h2>Информационная страница 1</h2>
+      <nav>
+        <a href="#info1" onclick="document.getElementById('info1-top').scrollIntoView();return false">Раздел 1</a> |
+        <a href="#info1#sub" onclick="document.getElementById('info1-sub').scrollIntoView();return false">Раздел 2</a> |
+        <a href="#home" onclick="document.getElementById('home').scrollIntoView();return false">К началу</a>
+      </nav>
+      <div id="info1-top"><h3>Вступление</h3>
+      <p>Здесь — некоторая теоретическая информация.</p></div>
+      <div id="info1-sub"><h3>Подробности</h3>
+      <p>Подробное описание с примерами. Обратите внимание на навигацию вверху — она подсвечивает текущий раздел.</p>
+      </div>
+    </section>
+
+    <!-- инфо2 с якорями -->
+    <section id="info2">
+      <h2>Информационная страница 2</h2>
+      <p>В этой странице продемонстрирован пример закладок (якорей).</p>
+      <nav>
+        <a href="#info2:part1" onclick="document.getElementById('info2-part1').scrollIntoView();return false">Раздел 1</a> |
+        <a href="#info2:part2" onclick="document.getElementById('info2-part2').scrollIntoView();return false">Раздел 2</a> |
+        <a href="#home" onclick="document.getElementById('home').scrollIntoView();return false">К началу</a>
+      </nav>
+      <div id="info2-part1"><h3>Часть 1</h3>
+        <p>Первый подпункт. <a href="#info2:anchor" onclick="document.getElementById('special-anchor').scrollIntoView();return false">Перейти к специальному якорю</a>.</p>
+      </div>
+      <div id="info2-part2"><h3>Часть 2</h3>
+        <p>Второй подпункт. Пример внешней ссылки в новом окне: <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN</a>.</p>
+      </div>
+      <div id="special-anchor" style="margin-top:16px;padding:8px;border-left:4px solid var(--accent);">
+        <h4>Специальный якорь (ID: info2:anchor)</h4>
+        <p id="info2:anchor">Это фрагмент, на который ссылается навигация сверху (и главным меню через ссылку "Якорь (info2)").</p>
+      </div>
+    </section>
+
+    <!-- инфо 3 с картинкой и табличкой -->
+    <section id="info3">
+      <h2>Информационная страница 3 — Изображения и таблицы</h2>
+      <p>Здесь демонстрируются изображения (миниатюра -> большое окно) и таблица с фоновым изображением.</p>
+
+      <h3>Изображение (миниатюра)</h3>
+      <p>Нажмите на миниатюру, чтобы открыть большое изображение в центре нового окна.</p>
+      <img src="https://picsum.photos/seed/thumb/100/70" alt="мини" class="thumb" onclick="openCenteredImage('https://picsum.photos/seed/large/600/400')">
+
+      <h3>Таблица с фоновым изображением</h3>
+      <table class="sample">
+        <tr>
+          <th>Позиция</th>
+          <th>Описание</th>
+          <th>Ссылка</th>
+        </tr>
+        <tr>
+          <td><img src="https://picsum.photos/seed/cell/120/80" alt="в ячейке" style="max-width:120px;border-radius:6px"></td>
+          <td>Пример таблицы, фон таблицы задан изображением (CSS). В этой ячейке — изображение.</td>
+          <td><a href="https://example.com" target="_blank" rel="noopener">Внешняя ссылка</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Ещё одна строка <a href="#info1" onclick="document.getElementById('info1-top').scrollIntoView();return false">ссылкой внутри сайта</a>.</td>
+          <td><a href="#" onclick="alert('Гиперссылка внутри'); return false">Внутренняя ссылка</a></td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- формы -->
+    <section id="forms">
+      <h2>Формы</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:320px">
+          <h3>Форма контактов (отправка на удалённый сервер)</h3>
+          <form action="https://httpbin.org/post" method="post" target="_blank">
+            <label>Фамилия:<br><input type="text" name="surname" required></label><br>
+            <label>Имя:<br><input type="text" name="firstname" required></label><br>
+            <label>Группа:<br><input type="text" name="group"></label><br>
+            <label>Мобильный телефон:<br><input type="tel" name="phone"></label><br>
+            <label>Электронная почта:<br><input type="email" name="email"></label><br>
+            <label>Дата отправки:<br><input type="date" name="sent_date" value="2025-11-03"></label><br><br>
+            <button type="submit">Отправить контактные данные</button>
+          </form>
+        </div>
+
+        <div style="flex:1;min-width:320px">
+          <h3>Форма оригинальных данных (заказ)</h3>
+          <form action="https://httpbin.org/post" method="post" target="_blank">
+            <label>Название товара:<br><input type="text" name="product_name" value="Книга"></label><br>
+            <label>Количество:<br><input type="number" name="quantity" value="1" min="1"></label><br>
+            <label>Дата доставки:<br><input type="date" name="delivery_date"></label><br>
+            <label>Пароль (пример):<br><input type="password" name="order_password"></label><br>
+            <p>Способ оплаты:</p>
+            <label><input type="radio" name="payment_method" value="card" checked> Картой</label>
+            <label><input type="radio" name="payment_method" value="cash"> Наличными</label><br>
+            <label><input type="checkbox" name="gift_wrap" value="yes"> Упаковать в подарок</label><br>
+            <label>Комментарий:<br><textarea name="comment" rows="3"></textarea></label><br>
+            <!-- hidden поле со значением по умолчанию -->
+            <input type="hidden" name="referral" value="site">
+            <br>
+            <button type="submit">Отправить заказ</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page to change Cyrillic to Latin on click -->
+    <section id="dom-change">
+      <h2>Изменяем кириллицу на латиницу по клику</h2>
+      <p>Ниже — та же информация (фамилия, имя, год рождения). Нажмите кнопку — данные будут транслитерированы в латиницу.</p>
+      <div id="passport-copy">
+        <p>Фамилия: <span class="changeable">Иванов</span></p>
+        <p>Имя: <span class="changeable">Пётр</span></p>
+        <p>Год рождения: <span class="changeable">1995</span></p>
+      </div>
+      <button id="translit-btn">Транслитерировать в латиницу</button>
+    </section>
+
+    <!-- алгоритмическая задачка -->
+  <section id="algo">
+  <h2>Проверка прямоугольников</h2>
+  <p>
+    Даны положительные числа a, b, c, d. Определите, может ли прямоугольник a × b
+    поместиться в прямоугольник c × d (поворот на 90° разрешён).
+  </p>
+
+  <form id="algo-form" onsubmit="event.preventDefault(); checkFit();">
+    <label>a: <input type="number" step="any" id="a" required placeholder="Введите a"></label>
+    <label>b: <input type="number" step="any" id="b" required placeholder="Введите b"></label>
+    <label>c: <input type="number" step="any" id="c" required placeholder="Введите c"></label>
+    <label>d: <input type="number" step="any" id="d" required placeholder="Введите d"></label>
+    <button type="submit">Проверить</button>
+  </form>
+
+  <div id="algo-result" style="margin-top: 12px; font-weight: bold;"></div>
+</section>
+
+  </main>
+
+  <footer>
+    Учебный пример — сгенерировано автоматически. Откройте этот файл в браузере; формы отправляют данные на https://httpbin.org/post (в новом окне).
+  </footer>
+
+  <script>
+    // Navigation handling: highlight current section and update "Вы здесь"
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentLoc = document.getElementById('current-location');
+
+    function setActive(hash){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      // find link matching hash (either id or id:anchor)
+      let key = (hash||'home').replace(/^#/, '');
+      // try to match data-target
+      let matched = Array.from(navLinks).find(a=>a.dataset.target===key);
+      if(matched) matched.classList.add('active');
+      currentLoc.textContent = (matched? matched.textContent : key) || 'Главная';
+    }
+
+    // interpret hash like info2:anchor
+    function showSectionFromHash(){
+      const hash = location.hash || '#home';
+      let clean = hash.replace(/^#/, '');
+      // if contains colon, split
+      let main = clean.split(':')[0];
+      // scroll to element
+      const el = document.getElementById(main) || document.getElementById(clean) || document.querySelector('main');
+      if(el) el.scrollIntoView();
+      setActive(hash);
+    }
+
+    window.addEventListener('hashchange', showSectionFromHash);
+    window.addEventListener('load', showSectionFromHash);
+
+    // open centered image in new window
+    function openCenteredImage(url){
+      const w = 640, h = 480;
+      const wx = window.screenX || window.screenLeft || 0;
+      const wy = window.screenY || window.screenTop || 0;
+      const sw = window.outerWidth || screen.width;
+      const sh = window.outerHeight || screen.height;
+      const left = Math.max(0, Math.round(wx + (sw - w)/2));
+      const top = Math.max(0, Math.round(wy + (sh - h)/2));
+      const features = `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`;
+      const win = window.open('', '_blank', features);
+      if(!win) { alert('Блокировщик окон мешает открыть большое изображение. Разрешите всплывающие окна.'); return }
+      win.document.title = 'Изображение';
+      const img = win.document.createElement('img');
+      img.src = url; img.style.maxWidth='100%'; img.style.height='auto';
+      win.document.body.style.margin='0'; win.document.body.style.display='flex'; win.document.body.style.alignItems='center'; win.document.body.style.justifyContent='center';
+      win.document.body.appendChild(img);
+    }
+
+    // DOM reading example
+    document.getElementById('read-dom').addEventListener('click', ()=>{
+      try{
+        // the requested expression from task (example): document.getElementsByTagName('p')[2].childNodes[1].innerText
+        const val = document.getElementsByTagName('p')[2].childNodes[1] ? document.getElementsByTagName('p')[2].childNodes[1].innerText : 'Элемент не найден';
+        document.getElementById('dom-output').textContent = 'Результат выражения: ' + String(val);
+      }catch(e){
+        document.getElementById('dom-output').textContent = 'Ошибка: ' + e.message;
+      }
+    });
+
+    // Transliteration (simple map)
+    const map = {
+      'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'Zh','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'Kh','Ц':'Ts','Ч':'Ch','Ш':'Sh','Щ':'Sch','Ъ':'','Ы':'Y','Ь':'','Э':'E','Ю':'Yu','Я':'Ya',
+      'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+    };
+    function transliterate(s){
+      return s.split('').map(ch=> map[ch] !== undefined ? map[ch] : ch ).join('');
+    }
+    document.getElementById('translit-btn').addEventListener('click', ()=>{
+      document.querySelectorAll('#dom-change .changeable').forEach(el=>{
+        el.textContent = transliterate(el.textContent);
+      });
+    });
+
+    // Algorithm check
+    function checkFit(){
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+      const d = parseFloat(document.getElementById('d').value);
+      if([a,b,c,d].some(isNaN) || [a,b,c,d].some(x=>x<=0)){
+        document.getElementById('algo-result').textContent = 'Введите положительные числа.'; return;
+      }
+      // can fit if (a<=c && b<=d) || (a<=d && b<=c)
+      const fit = (a<=c && b<=d) || (a<=d && b<=c);
+      document.getElementById('algo-result').textContent = fit ? 'Прямоугольник помещается (включая поворот на 90°).' : 'Не помещается (без наклона/скоса).';
+    }
+
+  </script>
 </body>
 </html>
