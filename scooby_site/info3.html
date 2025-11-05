@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Серии комиксов Скуби-Ду</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<style>
+/*фоооон */
+table.sample {
+  width: 100%;
+  border-collapse: collapse;
+  background-image: url('images/scooby-4.jpg');
+  background-size: cover; 
+  background-position: center;
+}
+
+table.sample th, table.sample td {
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 12px;
+  background: rgba(255,255,255,0.45); /* слегка прозрач */
+}
+</style>
+
+<header>
+  <div class="container">
+    <img class="logo" src="images/scooby-thumb.jpg" alt="Logo">
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="info1.html" class="nav-link">История</a>
+      <a href="info2.html" class="nav-link">Персонажи</a>
+      <a href="info3.html" class="nav-link active">Серии</a>
+      <a href="pasport.html">Паспорт</a>
+      <a href="dom_js.html">DOM JS</a>
+      <a href="algo.html">Алгоритмика</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Серии комиксов Скуби-Ду</h1>
+  <p>Ниже приведена таблица с известными сериями, их изображениями и ссылками на дополнительные материалы.</p>
+
+  <table class="sample">
+    <tr>
+      <th>Серия</th>
+      <th>Описание</th>
+      <th>Изображение</th>
+      <th>Ссылка</th>
+    </tr>
+    <tr>
+      <td>Скуби-Ду и Призрачный замок</td>
+      <td>Первая классическая серия приключений команды.</td>
+      <td><img src="images/scooby-1.jpg" width="60" alt="Скуби-Ду"></td>
+      <td><a href="https://en.wikipedia.org/wiki/Scooby-Doo,_Where_Are_You!" target="_blank">Подробнее</a></td>
+    </tr>
+    <tr>
+      <td>Скуби-Ду и Тайна затонувшего корабля</td>
+      <td>Команда расследует мистическое исчезновение корабля.</td>
+      <td><img src="images/scooby-2.jpg" width="60" alt="Тайна"></td>
+      <td><a href="https://en.wikipedia.org/wiki/Scooby-Doo" target="_blank">Подробнее</a></td>
+    </tr>
+    <tr>
+      <td>Скуби-Ду и Остров Муска</td>
+      <td>Скуби-Ду и друзья раскрывают загадку дома Мускара (кошки и все дела).</td>
+      <td><img src="images/scooby-3.jpg" width="60" alt="Скуби-Ду"></td>
+      <td><a href="https://www.dccomics.com/characters/scooby-doo" target="_blank">Подробнее</a></td>
+    </tr>
+  </table>
+
+  <h2>Дополнительные материалы</h2>
+  <ul>
+    <li>Классические комиксы</li>
+    <li>Современные издания</li>
+    <li>Мультсериалы и фильмы</li>
+  </ul>
+
+  <p>Все изображения и ссылки приведены для ознакомительных целей.</p>
+
+  <section id="contact-form">
+  <h2>Форма контактов</h2>
+  <form action="https://httpbin.org/post" method="post" target="_blank">
+    <label>Фамилия:<br><input type="text" name="surname" required></label><br>
+    <label>Имя:<br><input type="text" name="firstname" required></label><br>
+    <label>Группа:<br><input type="text" name="group"></label><br>
+    <label>Мобильный телефон:<br><input type="tel" name="phone"></label><br>
+    <label>Электронная почта:<br><input type="email" name="email"></label><br>
+    <label>Дата отправки:<br><input type="date" name="sent_date" value="2025-11-05"></label><br><br>
+    <button type="submit">Отправить контактные данные</button>
+  </form>
+</section>
+
+<hr>
+
+<section id="order-form">
+  <h2>Форма заказа / отзыва</h2>
+  <form action="https://httpbin.org/post" method="post" target="_blank">
+    <label>Название товара:<br><input type="text" name="product_name" value="Скуби-Ду фигурка" required></label><br>
+    <label>Количество:<br><input type="number" name="quantity" value="1" min="1"></label><br>
+    <label>Тип доставки:<br>
+      <input type="radio" name="delivery" value="courier" checked> Курьер
+      <input type="radio" name="delivery" value="pickup"> Самовывоз
+    </label><br>
+    <label>Дополнительно:<br>
+      <input type="checkbox" name="gift_wrap" value="yes"> Упаковка в подарок
+      <input type="checkbox" name="fragile" value="yes"> Хрупкое
+    </label><br>
+    <label>Дата заказа:<br><input type="date" name="order_date" value="2025-11-05"></label><br>
+    <label>Пароль для подтверждения:<br><input type="password" name="password" value="1234"></label><br>
+    <input type="hidden" name="hidden_field" value="secret123"><br>
+    <button type="submit">Отправить заказ / отзыв</button>
+  </form>
+</section>
+
+
+</main>
+
+<footer>
+  &copy; 2025 Комиксы Скуби-Ду | 
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">Назад на главную</a>
+</footer>
+
+
+</body>
+</html>

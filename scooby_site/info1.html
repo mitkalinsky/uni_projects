@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>История и фильмы Скуби-Ду</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Чтобы нумерация типа 1.1, 1.2 работала */
+ol { counter-reset: item }
+ol li { display: block; }
+ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+ol li ol li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <img class="logo" src="images/scooby-thumb.jpg" alt="Logo">
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="info1.html" class="nav-link active">История</a>
+      <a href="info2.html" class="nav-link">Персонажи</a>
+      <a href="info3.html" class="nav-link">Серии</a>
+      <a href="pasport.html" class="nav-link">Паспорт</a>
+      <a href="dom_js.html">DOM JS</a>
+      <a href="algo.html">Алгоритмика</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>История и фильмы Скуби-Ду</h1>
+
+  <section id="history">
+    <h2>История Скуби-Ду</h2>
+    <ul>
+      <li>Скуби-Ду впервые появился в 1969 году
+        <ul>
+          <li>Создатели: Джо Рубин и Кен Спир</li>
+          <li>Изначальная команда «Мистерии-Инк»</li>
+        </ul>
+      </li>
+      <li>Основная идея: расследование таинственных происшествий
+        <ul>
+          <li>Команда расследует призраков и монстров</li>
+          <li>Использует логическое мышление и ловушки</li>
+        </ul>
+      </li>
+      <li>Популярность
+        <ul>
+          <li>Сначала США, потом весь мир</li>
+          <li>Множество сериалов, фильмов и комиксов</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section id="movies">
+    <h2>Части фильмов и сериалов Скуби-Ду</h2>
+    <ol>
+      <li>Скуби-Ду, где ты?
+        <ol>
+          <li>Фильм 1: Призрак на кладбище</li>
+          <li>Фильм 2: Тайна затерянного замка</li>
+        </ol>
+      </li>
+      <li>Скуби-Ду встречает команду
+        <ol>
+          <li>Фильм 1: Пиратская шхуна</li>
+          <li>Фильм 2: Проклятие мумии</li>
+          <li>Фильм 3: Призрачный замок</li>
+        </ol>
+      </li>
+      <li>Современные мультфильмы и фильмы
+        <ol>
+          <li>Фильм 1: Скуби-Ду и загадка Голливуда</li>
+          <li>Фильм 2: Скуби-Ду и город духов</li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+<a href="https://ru.wikipedia.org/wiki/Скуби-Ду" target="_blank">
+  <img src="images/scooby-thumb.jpg" alt="Скуби-Ду" 
+       style="width:120px; height:auto; border-radius:6px; cursor:pointer;">
+</a>
+
+
+</main>
+
+<footer>
+  &copy; 2025 Комиксы Скуби-Ду | 
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">Назад на главную</a>
+</footer>
+
+</body>
+</html>

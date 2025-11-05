@@ -1,0 +1,124 @@
+/* типа это мои основные цвета для сайта */
+:root{
+  --accent: #6996b2;   /* типа цвет для акцентов, кнопок, активного меню */
+  --bg: #f4f8fa;       /* фон страницы */
+  --navbg: #ffffff;    /* фон шапки/меню */
+  --text: #2F4454;     /* цвет текста обычного */
+}
+
+/* общий стиль для всего тела страницы */
+body {
+  font-family: Inter, system-ui, Arial; /* шрифт всякий, чтоб читалось */
+  margin: 0;                             /* убрал стандартные отступы */
+  background: var(--bg);                 /* фон сайта */
+  color: var(--text);                    /* цвет текста */
+}
+
+/* шапка сверху */
+header{
+  background: var(--navbg);             /* фон шапки */
+  position: sticky;                     /* типа зафиксирована сверху */
+  top: 0;                               /* сверху всегда */
+  box-shadow: 0 2px 6px rgba(0,0,0,.06); /* легкая тень */
+  z-index: 10;                          /* чтобы сверху всего была */
+}
+
+/* контейнер внутри шапки/страницы */
+.container{
+  max-width: 1000px;                    /* не растягиваем слишком */
+  margin: 0 auto;                       /* по центру */
+  padding: 12px;                         /* типа внутренний отступ */
+  display:flex;                          /* горизонтально вещи */
+  align-items:center;                    /* выравнивание по центру */
+  justify-content:space-between;         /* чтобы левое и правое растянулось */
+}
+
+/* навигация */
+nav{
+  display:flex;                          /* горизонтально ссылки */
+  gap:8px;                               /* расстояние между ссылками */
+  flex-wrap:wrap;                        /* перенос на новую строчку если мало места */
+  align-items:center;                     /* по центру вертикально */
+}
+
+nav a{
+  padding:8px 12px;                      /* отступы вокруг текста */
+  text-decoration:none;                  /* убрал подчеркивание */
+  color: var(--text);                     /* обычный цвет */
+  border-radius:6px;                      /* закругленные углы */
+}
+
+/* активная ссылка меню */
+nav a.active{
+  background: var(--accent);             /* фон акцентный */
+  color:#fff;                             /* текст белый */
+}
+
+/* лого в меню */
+nav img.logo{
+  height:36px;                            /* высота картинки */
+  border-radius:4px;                       /* закругление */
+  margin-right:6px;                        /* расстояние от текста */
+}
+
+/* основной контент */
+main{
+  max-width:1000px;                        /* не шире блока */
+  margin:18px auto;                        /* отступ сверху/снизу и по центру */
+  padding:16px;                             /* внутренний отступ */
+}
+
+/* секции типа блоки контента */
+section{
+  background:#ffffff;                      /* светлый фон */
+  padding:16px;                             /* внутренний отступ */
+  border-radius:8px;                        /* закругление */
+  margin-bottom:16px;                       /* расстояние снизу */
+  border:1px solid #e3e9ef;                /* тонкая рамка */
+}
+
+/* заголовки */
+h1,h2{
+  color: var(--accent);                     /* цвет акцентный */
+  margin:8px 0;                             /* отступы сверху/снизу */
+}
+
+/* миниатюрки для картинок */
+.thumb{
+  width:90px;                               /* маленькая картинка */
+  cursor:pointer;                           /* курсор при наведении */
+  border-radius:4px;                         /* закругленные углы */
+  border:1px solid #ccc;                     /* рамка */
+}
+
+/* таблица с фоновым изображением */
+table.sample{
+  width:100%;                               /* на всю ширину */
+  border-collapse:collapse;                 /* убирает двойные линии */
+  background-image:url('images/background.jpg'); /* фон таблицы */
+  background-size:cover;                     /* чтобы заполнял */
+}
+
+table.sample td, table.sample th{
+  border:1px solid rgba(255,255,255,.6);    /* рамки ячеек */
+  padding:12px;                              /* внутренний отступ */
+  background:rgba(255,255,255,.85);         /* слегка прозрачный фон ячеек */
+}
+
+/* футер снизу */
+footer{
+  padding:12px;                              /* отступ внутри */
+  text-align:center;                          /* текст по центру */
+  font-size:.9em;                             /* чуть поменьше текст */
+  color:#666;                                 /* серый цвет */
+}
+
+/* кнопки */
+button{
+  background:var(--accent);                  /* фон кнопки */
+  color:#fff;                                /* текст белый */
+  padding:8px 14px;                           /* внутренний отступ */
+  border:none;                                /* убрал рамку */
+  border-radius:6px;                          /* закругление */
+  cursor:pointer;                             /* курсор */
+}

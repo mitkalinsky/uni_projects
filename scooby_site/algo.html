@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Решение алгоритмической задачи</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <img class="logo" src="images/scooby-thumb.jpg" alt="Logo">
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="info1.html" class="nav-link">История</a>
+      <a href="info2.html" class="nav-link">Персонажи</a>
+      <a href="info3.html" class="nav-link">Серии</a>
+      <a href="pasport.html" class="nav-link">Паспорт</a>
+      <a href="dom_js.html">DOM JS</a>
+      <a href="algo.html" class="nav-link active">Алгоритмика</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Решение алгоритмической задачи</h1>
+
+  <section id="algo">
+    <p>Условие: даны положительные вещественные числа <strong>a, b, c, d</strong>. Выясните, может ли прямоугольник со сторонами <strong>a, b</strong> уместиться внутри прямоугольника со сторонами <strong>c, d</strong> так, чтобы каждая сторона внутреннего была параллельна или перпендикулярна стороне внешнего (поворот на 90° разрешён).</p>
+
+    <p>Введите значения:</p>
+
+    <form id="algo-form" onsubmit="event.preventDefault(); checkFit();">
+      <label>a: <input type="number" step="any" id="a" required value="3"></label>
+      <label>b: <input type="number" step="any" id="b" required value="4"></label>
+      <label>c: <input type="number" step="any" id="c" required value="5"></label>
+      <label>d: <input type="number" step="any" id="d" required value="6"></label>
+      <button type="submit">Проверить</button>
+    </form>
+
+    <div id="algo-result" style="margin-top:12px; font-weight:bold;"></div>
+  </section>
+
+  <script>
+    function checkFit() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+      let c = parseFloat(document.getElementById("c").value);
+      let d = parseFloat(document.getElementById("d").value);
+
+      // Проверяем два варианта: без поворота и с поворотом
+      if ((a <= c && b <= d) || (a <= d && b <= c)) {
+        document.getElementById("algo-result").textContent =
+          "✅ Прямоугольник поместится";
+      } else {
+        document.getElementById("algo-result").textContent =
+          "❌ Прямоугольник НЕ поместится";
+      }
+    }
+  </script>
+
+</main>
+
+<footer>
+  &copy; 2025 Комиксы Скуби-Ду | 
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">Назад на главную</a>
+</footer>
+
+
+</body>
+</html>

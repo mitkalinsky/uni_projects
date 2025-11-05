@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Паспорт</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <img class="logo" src="images/scooby-thumb.jpg" alt="Logo">
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="info1.html" class="nav-link">История</a>
+      <a href="info2.html" class="nav-link">Персонажи</a>
+      <a href="info3.html" class="nav-link">Серии</a>
+      <a href="pasport.html" class="nav-link active">Паспорт</a>
+      <a href="dom_js.html">DOM JS</a>
+      <a href="algo.html">Алгоритмика</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Паспорт персонажа</h1>
+
+  <section id="passport-page2">
+    <h2>Страница 2: Личные данные</h2>
+    <p>Фамилия: <span class="changeable" id="surname">Калинская</span></p>
+    <p>Имя: <span class="changeable" id="firstname">Дарья</span></p>
+    <p>Год рождения: <span class="changeable" id="birthyear">2006</span></p>
+    <p>Место рождения: <span class="changeable" id="birthplace">г. Москва</span></p>
+    <p>Профессия: <span class="changeable" id="nationality">историк</span></p>
+    <button id="translit-btn">Сделать латиницей</button>
+  </section>
+
+  <section id="passport-page3">
+    <h2>Страница 3: Дополнительные данные о Скуби Ду</h2>
+    <p>Рост: <span id="height">1.2 м</span></p>
+    <p>Вес: <span id="weight">45 кг</span></p>
+    <p>Место рождения: <span class="changeable" id="birthplace">г. Москва</span></p>
+<p>Цвет глаз: <span class="changeable" id="eye-color">Коричневый</span></p>
+<p>Цвет волос: <span class="changeable" id="hair-color">Коричневый</span></p>
+<p>Особые приметы: <span class="changeable" id="features">Любит лакомства</span></p>
+
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Комиксы Скуби-Ду | 
+  <a href="index.html" style="color:var(--accent); text-decoration:none;">Назад на главную</a>
+</footer>
+
+<!-- === в латыынь === -->
+<script>
+const map = {
+  'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'E','Ж':'Zh','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'Kh','Ц':'Ts','Ч':'Ch','Ш':'Sh','Щ':'Sch','Ъ':'','Ы':'Y','Ь':'','Э':'E','Ю':'Yu','Я':'Ya',
+  'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+};
+
+function transliterate(str){
+  return str.split('').map(ch => map[ch] !== undefined ? map[ch] : ch).join('');
+}
+
+// обработка кнопки
+document.getElementById('translit-btn').addEventListener('click', ()=>{
+  document.querySelectorAll('.changeable').forEach(el => {
+    el.textContent = transliterate(el.textContent);
+  });
+});
+</script>
+
+</body>
+</html>
