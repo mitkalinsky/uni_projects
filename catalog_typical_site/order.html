@@ -4,51 +4,63 @@
   <meta charset="UTF-8">
   <title>BoardGame Hub — Оформление заказа</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Подключаем Bootstrap 5 -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   >
   <style>
+    /* ========= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ========= */
     :root {
-      --bg-main: #f5f5f7;
-      --bg-card: #ffffff;
-      --accent: #111827;
-      --accent-blue: #2563eb;
-      --text-main: #111827;
-      --text-muted: #6b7280;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --bg-main: #f5f5f7;         /* Основной фон страницы */
+      --bg-card: #ffffff;         /* Фон карточек и форм */
+      --accent: #111827;          /* Тёмный акцентный цвет */
+      --accent-blue: #2563eb;     /* Синий акцент */
+      --text-main: #111827;       /* Основной текст */
+      --text-muted: #6b7280;      /* Второстепенный текст */
+      --radius-lg: 18px;          /* Скругления блоков */
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08); /* Мягкая тень */
     }
+
     * { box-sizing: border-box; }
+
     body {
-      padding-top: 72px;
+      padding-top: 72px;              /* Отступ под фиксированную навигацию */
       background-color: var(--bg-main);
       color: var(--text-main);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
       letter-spacing: 0.01em;
+      line-height: 1.55;             /* Читаемость текста */
     }
+
+    /* ========= НАВИГАЦИЯ (та же, что на других страницах) ========= */
     .navbar {
       background: rgba(15, 23, 42, 0.9) !important;
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(148, 163, 184, 0.25);
     }
+
     .navbar-brand {
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 0.9rem;
     }
+
     .nav-link {
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: rgba(229, 231, 235, 0.8) !important;
     }
+
     .nav-link.active {
       color: #f9fafb !important;
       position: relative;
     }
+
     .nav-link.active::after {
       content: "";
       position: absolute;
@@ -58,40 +70,81 @@
       border-radius: 999px;
       background: linear-gradient(90deg, #38bdf8, #6366f1, #ec4899);
     }
-    main {
-      max-width: 960px;
+
+    /* ========= КОНТЕЙНЕРЫ И МОБИЛЬНЫЕ ОТСТУПЫ ========= */
+    main,
+    section,
+    footer .container {
+      max-width: 960px;  /* Не даём контенту растягиваться слишком широко */
     }
+
+    /* Дополнительный «воздух» слева/справа на мобильных,
+       чтобы текст не прилипал к краю экрана. */
+    @media (max-width: 576px) {
+      main,
+      section,
+      footer .container {
+        padding-inline: 1.25rem;
+      }
+    }
+
+    /* ========= ТИПОГРАФИКА СТРАНИЦЫ ========= */
     .page-kicker {
       text-transform: uppercase;
       letter-spacing: 0.16em;
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
     .page-title {
       font-size: clamp(2rem, 3vw, 2.4rem);
       letter-spacing: -0.05em;
       margin-bottom: 0.9rem;
     }
+
     .page-subtitle {
       max-width: 540px;
       font-size: 0.96rem;
       color: var(--text-muted);
     }
+
+    nav.page-nav a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav.page-nav a:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    section {
+      scroll-margin-top: 96px; /* чтобы якоря не скрывались под шапкой */
+    }
+
+    /* ========= ОБОЛОЧКА БЛОКОВ (карточка с заказом и формой) ========= */
     .order-shell {
       background: var(--bg-card);
       border-radius: 24px;
       border: 1px solid rgba(209, 213, 219, 0.9);
       box-shadow: var(--shadow-soft);
       padding: 1.7rem 1.5rem 1.5rem;
+      margin-bottom: 1.5rem;
     }
+
+    /* ========= ТАБЛИЦА С СОСТАВОМ ЗАКАЗА ========= */
     .order-table-header,
     .order-table-row {
       display: grid;
-      grid-template-columns: 1.5fr 0.7fr 0.6fr 0.7fr;
+      grid-template-columns: 1.5fr 0.7fr 0.6fr 0.7fr; /* Название, цена, кол-во, сумма */
       column-gap: 0.75rem;
       font-size: 0.88rem;
       align-items: center;
     }
+
     .order-table-header {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -101,95 +154,24 @@
       padding-bottom: 0.35rem;
       margin-bottom: 0.35rem;
     }
+
     .order-table-row {
       padding: 0.4rem 0;
       border-bottom: 1px solid rgba(243, 244, 246, 1);
     }
+
     .order-table-row:last-child {
       border-bottom: none;
     }
+
     .order-summary {
       font-size: 0.9rem;
       padding-top: 0.6rem;
       border-top: 1px solid rgba(209, 213, 219, 0.9);
       margin-top: 0.4rem;
     }
-    .form-label {
-      font-size: 0.86rem;
-      color: var(--text-main);
-      margin-bottom: 0.25rem;
-    }
-    .form-control, .form-select {
-      border-radius: 999px;
-      border-color: rgba(209, 213, 219, 0.9);
-      font-size: 0.9rem;
-      padding-inline: 1rem;
-    }
-    textarea.form-control {
-      border-radius: 1rem;
-      min-height: 90px;
-    }
-    .form-control:focus, .form-select:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-    .small-hint {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-    }
-    fieldset {
-      border: none;
-      padding: 0;
-      margin: 0 0 0.75rem;
-    }
-    legend {
-      font-size: 0.82rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-    .form-check-label {
-      font-size: 0.85rem;
-    }
-    .btn-primary-min {
-      border-radius: 999px;
-      font-size: 0.83rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 0.65rem 1.7rem;
-      border: none;
-      background: #111827;
-      color: #f9fafb;
-    }
-    .btn-primary-min:hover {
-      background: #000000;
-    }
-    .btn-ghost-link {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    .btn-ghost-link:hover { color: var(--accent-blue); }
-    footer.site-footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 1.5rem 0 1.25rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      background-color: #f9fafb;
-      margin-top: 3rem;
-    }
-    footer .footer-right {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-    footer a:hover { text-decoration: underline; }
+
+    /* Верстка на очень маленьких экранах — убираем заголовок-ряд */
     @media (max-width: 640px) {
       .order-table-header {
         display: none;
@@ -200,9 +182,105 @@
         row-gap: 0.2rem;
       }
     }
+
+    /* ========= ПОЛЯ ФОРМЫ ========= */
+    .form-label {
+      font-size: 0.86rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 999px;
+      border-color: rgba(209, 213, 219, 0.9);
+      font-size: 0.9rem;
+      padding-inline: 1rem;
+    }
+
+    textarea.form-control {
+      border-radius: 1rem;
+      min-height: 90px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .small-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 0.75rem;
+    }
+
+    legend {
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-check-label {
+      font-size: 0.85rem;
+    }
+
+    /* ========= КНОПКИ ========= */
+    .btn-primary-min {
+      border-radius: 999px;
+      font-size: 0.83rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.65rem 1.7rem;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .btn-primary-min:hover {
+      background: #000000;
+    }
+
+    .btn-ghost-link {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .btn-ghost-link:hover { color: var(--accent-blue); }
+
+    /* ========= ФУТЕР ========= */
+    footer.site-footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 0 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background-color: #f9fafb;
+      margin-top: 3rem;
+    }
+
+    footer .footer-right {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body id="top">
+<!-- ======== ОБЩАЯ НАВИГАЦИЯ ======== -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">BoardGame Hub</a>
@@ -230,37 +308,50 @@
   </div>
 </nav>
 
+<!-- ======== ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ ======== -->
 <main class="container my-4">
+  <!-- Шапка страницы с объяснением -->
   <header class="mb-4">
     <p class="page-kicker mb-2">Заказ</p>
     <h1 class="page-title">Проверьте корзину и подтвердите заказ</h1>
     <p class="page-subtitle">
-      Здесь отображается содержимое корзины, сохранённое на странице каталога. При необходимости вернитесь назад и измените состав, затем заполните форму и отправьте заказ.
+      На этой странице мы собрали всё, что вы добавили в корзину в каталоге. Проверьте
+      список игр, убедитесь, что количество и сумма вас устраивают, а затем заполните
+      данные для доставки. Мы свяжемся с вами, чтобы уточнить детали и предложить
+      рекомендации, если вы оставите комментарий.
     </p>
   </header>
 
-  <!-- Внутренняя навигация -->
-  <nav class="mb-3">
+  <!-- Внутренняя навигация по якорям страницы -->
+  <nav class="page-nav mb-3">
     <span class="page-kicker me-2" style="font-size:0.7rem;">Навигация:</span>
-    <a class="btn-ghost-link me-2" href="#order-items">Раздел 1</a>
-    <a class="btn-ghost-link me-2" href="#order-form">Раздел 2</a>
-    <a class="btn-ghost-link" href="#top">К началу</a>
+    <a class="me-1" href="#order-items">Состав корзины</a>
+    <a class="me-1" href="#order-form">Данные покупателя</a>
+    <a href="#top">К началу</a>
   </nav>
 
-  <div class="order-shell mb-4" id="order-items">
+  <!-- ======== БЛОК 1: Состав корзины ======== -->
+  <div class="order-shell" id="order-items">
     <h2 class="page-kicker mb-3" style="font-size:0.8rem;">Состав корзины</h2>
+
+    <!-- Сообщение, если корзина пустая -->
     <div id="cart-empty" class="small-hint mb-2" style="display:none;">
-      Корзина пуста. Перейдите в каталог и добавьте игры.
+      Корзина пуста. Перейдите в каталог, добавьте игры и вернитесь на эту страницу.
     </div>
 
+    <!-- Табличное отображение содержимого корзины -->
     <div id="cart-table">
+      <!-- Заголовок таблицы (на десктопе) -->
       <div class="order-table-header">
         <div>Игра</div>
         <div>Цена</div>
         <div>Кол-во</div>
         <div>Сумма</div>
       </div>
+      <!-- Сюда JS добавит строки по каждой позиции -->
       <div id="order-rows"></div>
+
+      <!-- Резюме: количество позиций и итоговая сумма -->
       <div class="order-summary">
         <div class="d-flex justify-content-between">
           <span>Всего позиций:</span>
@@ -274,19 +365,23 @@
     </div>
 
     <p class="small-hint mt-2 mb-0">
-      Количество можно отредактировать на странице каталога в корзине. Здесь корзина отображается только для проверки перед отправкой.
+      Состав и количество игр можно изменить на странице каталога в корзине. Здесь
+      корзина отображается только для проверки перед финальным подтверждением заказа.
     </p>
   </div>
 
+  <!-- ======== БЛОК 2: Форма с данными покупателя и доставкой ======== -->
   <div class="order-shell" id="order-form">
+    <!-- Форма отправляется на учебный сервер httpbin.org, вместе с JSON‑корзиной -->
     <form
       class="row g-3"
       action="https://httpbin.org/post"
       method="post"
     >
-      <!-- Сериализованная корзина -->
+      <!-- Скрытое поле, в котором лежит сериализованный JSON корзины (cart_json) -->
       <input type="hidden" name="cart_json" id="cart-json">
 
+      <!-- Блок с контактными данными покупателя -->
       <section class="col-12">
         <h2 class="page-kicker mb-3" style="font-size:0.8rem;">Данные покупателя</h2>
 
@@ -327,10 +422,12 @@
         </div>
 
         <p class="small-hint mb-0">
-          Контакты используются только для связи по текущему заказу и не передаются третьим лицам.
+          Контакты используются только для связи по вашему заказу: подтверждение,
+          уточнение доставки и, при необходимости, рекомендации по играм.
         </p>
       </section>
 
+      <!-- Блок с выбором доставки и комментарием -->
       <section class="col-12 mt-3">
         <h2 class="page-kicker mb-3" style="font-size:0.8rem;">Доставка</h2>
 
@@ -395,11 +492,12 @@
             id="customerComment"
             name="customer_comment"
             rows="3"
-            placeholder="Дополнительные пожелания, удобное время звонка и т.п."
+            placeholder="Напишите, для кого вы выбираете игры (возраст, опыт, повод) — мы сможем дать рекомендации."
           ></textarea>
         </div>
       </section>
 
+      <!-- Кнопка отправки формы + ссылка назад -->
       <div class="col-12 d-flex justify-content-between align-items-center mt-3">
         <a href="catalog.html" class="btn-ghost-link">Вернуться в каталог</a>
         <button type="submit" class="btn-primary-min">
@@ -410,11 +508,13 @@
   </div>
 </main>
 
+<!-- ======== ФУТЕР ======== -->
 <footer class="site-footer">
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
     <div>
       <div class="page-kicker mb-1">BoardGame Hub</div>
       <div>Минималистичный магазин настольных игр, 2025.</div>
+      <div>Если вы сомневаетесь между несколькими играми — укажите это в комментарии, мы поможем выбрать.</div>
     </div>
     <div class="footer-right">
       <span>email: orders@boardgame-hub.example</span>
@@ -424,22 +524,32 @@
   </div>
 </footer>
 
+<!-- Bootstrap JS для работы компонентов -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-  // Те же товары, что и в каталоге — чтобы пересчитать сумму
+  /* ========= ЛОГИКА: ЗАГРУЗКА КОРЗИНЫ ИЗ localStorage ========= */
+
+  // Список игр и цен (тот же, что используется в каталоге),
+  // нужен для пересчёта суммы и вывода названий.
   const products = [
-    { id: 'catan', title: 'Колонизаторы', price: 3200 },
-    { id: 'carcassonne', title: 'Каркассон', price: 2900 },
-    { id: 'imaginarium', title: 'Имаджинариум', price: 2500 },
-    { id: 'munchkin', title: 'Манчкин', price: 2100 },
-    { id: 'alias', title: 'Alias', price: 1800 },
-    { id: 'codenames', title: 'Кодовые имена', price: 2400 },
-    { id: 'ticket-to-ride', title: 'Ticket to Ride', price: 3900 },
-    { id: 'dixit', title: 'Диксит', price: 3100 }
+    { id: 'catan',          title: 'Колонизаторы',     price: 3200 },
+    { id: 'carcassonne',    title: 'Каркассон',        price: 2900 },
+    { id: 'imaginarium',    title: 'Имаджинариум',     price: 2500 },
+    { id: 'munchkin',       title: 'Манчкин',          price: 2100 },
+    { id: 'alias',          title: 'Alias',            price: 1800 },
+    { id: 'codenames',      title: 'Кодовые имена',    price: 2400 },
+    { id: 'ticket-to-ride', title: 'Ticket to Ride',   price: 3900 },
+    { id: 'dixit',          title: 'Диксит',           price: 3100 }
   ];
+
+  // Создаём словарь вида { id: объектИгры }
   const productMap = Object.fromEntries(products.map(p => [p.id, p]));
+
+  // Ключ, под которым корзина хранится в localStorage
   const CART_KEY = 'boardgame_cart';
 
+  // Функция чтения корзины из localStorage
   function loadCart() {
     let cart = {};
     try {
@@ -451,16 +561,19 @@
     return cart;
   }
 
+  // Функция отображения корзины на странице + заполнение скрытого поля cart_json
   function renderOrder() {
-    const cart = loadCart();
-    const rowsEl = document.getElementById('order-rows');
-    const totalEl = document.getElementById('order-total');
-    const countEl = document.getElementById('order-items-count');
-    const hiddenCart = document.getElementById('cart-json');
-    const emptyEl = document.getElementById('cart-empty');
-    const tableEl = document.getElementById('cart-table');
+    const cart = loadCart();                   // Объект вида { idИгры: количество }
+    const rowsEl = document.getElementById('order-rows');    // Контейнер строк таблицы
+    const totalEl = document.getElementById('order-total');  // Элемент с итоговой суммой
+    const countEl = document.getElementById('order-items-count'); // Кол-во позиций
+    const hiddenCart = document.getElementById('cart-json'); // Скрытое поле для отправки
+    const emptyEl = document.getElementById('cart-empty');   // Блок "корзина пуста"
+    const tableEl = document.getElementById('cart-table');   // Обёртка таблицы
 
-    const entries = Object.entries(cart);
+    const entries = Object.entries(cart);      // Массив [id, qty]
+
+    // Если корзина пустая — показываем сообщение и скрываем таблицу
     if (entries.length === 0) {
       emptyEl.style.display = 'block';
       tableEl.style.display = 'none';
@@ -468,6 +581,7 @@
       return;
     }
 
+    // Иначе — показываем таблицу и заполняем данными
     emptyEl.style.display = 'none';
     tableEl.style.display = 'block';
 
@@ -482,6 +596,7 @@
       const rowTotal = p.price * qty;
       total += rowTotal;
 
+      // Создаём строку таблицы
       const row = document.createElement('div');
       row.className = 'order-table-row';
       row.innerHTML = `
@@ -498,6 +613,7 @@
     if (hiddenCart) hiddenCart.value = JSON.stringify(cart);
   }
 
+  // Инициализация отображения при загрузке страницы
   renderOrder();
 </script>
 </body>

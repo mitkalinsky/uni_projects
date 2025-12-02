@@ -4,53 +4,65 @@
   <meta charset="UTF-8">
   <title>BoardGame Hub — Главная</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Подключаем Bootstrap 5 -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   >
   <style>
+    /* ========= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ДЛЯ ЦВЕТОВ И ТЕНЕЙ ========= */
     :root {
-      --bg-main: #f5f5f7;
-      --bg-card: #ffffff;
-      --accent: #111827;
-      --accent-soft: #e5e7eb;
-      --accent-blue: #2563eb;
-      --text-main: #111827;
-      --text-muted: #6b7280;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --bg-main: #f5f5f7;         /* Основной фон сайта */
+      --bg-card: #ffffff;         /* Фон карточек/блоков */
+      --accent: #111827;          /* Тёмный акцентный цвет (текст, кнопки) */
+      --accent-soft: #e5e7eb;     /* Мягкий серый для границ/фона */
+      --accent-blue: #2563eb;     /* Синий акцент для ссылок и наведения */
+      --text-main: #111827;       /* Основной текст */
+      --text-muted: #6b7280;      /* Второстепенный текст */
+      --radius-lg: 18px;          /* Скругления крупных блоков */
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08); /* Мягкая тень карточек */
     }
+
     * { box-sizing: border-box; }
+
     body {
-      padding-top: 72px;
+      padding-top: 72px;              /* Отступ сверху под фиксированную навигацию */
       background-color: var(--bg-main);
       color: var(--text-main);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
       letter-spacing: 0.01em;
+      line-height: 1.55;             /* Читаемость текста */
     }
+
+    /* ========= НАВИГАЦИЯ (общая для сайта) ========= */
     .navbar {
       background: rgba(15, 23, 42, 0.9) !important;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(148, 163, 184, 0.25);
     }
+
     .navbar-brand {
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 0.9rem;
     }
+
     .nav-link {
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: rgba(229, 231, 235, 0.8) !important;
     }
+
     .nav-link.active {
       color: #f9fafb !important;
       position: relative;
     }
+
+    /* Подчёркивание активного пункта меню градиентной полоской */
     .nav-link.active::after {
       content: "";
       position: absolute;
@@ -60,32 +72,53 @@
       border-radius: 999px;
       background: linear-gradient(90deg, #38bdf8, #6366f1, #ec4899);
     }
-    main {
+
+    /* Максимальная ширина основного контента + «воздух» по бокам на мобильных */
+    main,
+    section,
+    footer .container {
       max-width: 1120px;
     }
+
+    /* Дополнительные отступы слева/справа на маленьких экранах,
+       чтобы текст не прилипал к краю. */
+    @media (max-width: 576px) {
+      main,
+      section,
+      footer .container {
+        padding-inline: 1.25rem;
+      }
+    }
+
     .page-kicker {
       text-transform: uppercase;
       letter-spacing: 0.16em;
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
+    /* Блок hero (первый экран) */
     .hero-wrap {
       min-height: calc(100vh - 120px);
       display: flex;
       align-items: center;
       padding: 2.5rem 0 3rem;
     }
+
     .hero-title {
       font-size: clamp(2.4rem, 4vw, 3.1rem);
       letter-spacing: -0.05em;
       margin-bottom: 1rem;
     }
+
     .hero-subtitle {
-      max-width: 460px;
-      font-size: 0.98rem;
+      max-width: 520px;
+      font-size: 1rem;
       color: var(--text-muted);
       margin-bottom: 1.6rem;
     }
+
+    /* Крупная чёрная кнопка */
     .btn-primary-min {
       border-radius: 999px;
       font-size: 0.83rem;
@@ -99,6 +132,8 @@
     .btn-primary-min:hover {
       background: #000000;
     }
+
+    /* Серая «призрачная» текстовая кнопка-ссылка */
     .btn-ghost-link {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -107,6 +142,8 @@
       text-decoration: none;
     }
     .btn-ghost-link:hover { color: var(--accent-blue); }
+
+    /* Карточка с картинкой в hero */
     .hero-card {
       background-color: var(--bg-card);
       border-radius: 24px;
@@ -114,20 +151,24 @@
       box-shadow: var(--shadow-soft);
       padding: 1.2rem;
     }
+
     .hero-card img {
       border-radius: 18px;
       height: 240px;
       width: 100%;
       object-fit: cover;
     }
+
     .hero-note {
       font-size: 0.78rem;
       color: var(--text-muted);
       margin-top: 0.75rem;
     }
+
     section {
-      scroll-margin-top: 96px;
+      scroll-margin-top: 96px; /* чтобы якорь не прятался под фиксированным меню */
     }
+
     .section-title {
       font-size: 1.15rem;
       letter-spacing: 0.06em;
@@ -135,6 +176,8 @@
       color: var(--text-muted);
       margin-bottom: 1.25rem;
     }
+
+    /* Универсальная информационная карточка */
     .info-card {
       background: var(--bg-card);
       border-radius: var(--radius-lg);
@@ -143,6 +186,8 @@
       font-size: 0.9rem;
       color: var(--text-muted);
     }
+
+    /* Футер сайта */
     footer.site-footer {
       border-top: 1px solid rgba(148, 163, 184, 0.35);
       padding: 1.5rem 0 1.25rem;
@@ -151,12 +196,14 @@
       background-color: #f9fafb;
       margin-top: 3rem;
     }
+
     footer .footer-right {
       display: flex;
       gap: 1.25rem;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
+
     footer a {
       color: inherit;
       text-decoration: none;
@@ -165,14 +212,20 @@
   </style>
 </head>
 <body id="top">
+<!-- ======== ОБЩАЯ НАВИГАЦИЯ САЙТА ======== -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
+    <!-- Логотип / название бренда -->
     <a class="navbar-brand" href="index.html">BoardGame Hub</a>
+
+    <!-- Кнопка-бургер для мобильной навигации -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#mainNav" aria-controls="mainNav"
             aria-expanded="false" aria-label="Переключить навигацию">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Основные пункты меню -->
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
         <li class="nav-item">
@@ -192,82 +245,104 @@
   </div>
 </nav>
 
+<!-- ======== HERO-БЛОК (первый экран) ======== -->
 <main class="container hero-wrap">
   <div class="row align-items-center g-4">
+    <!-- Левая колонка: главный продающий текст -->
     <div class="col-lg-6">
       <p class="page-kicker mb-2">Настольные игры</p>
-      <h1 class="hero-title">Минималистичный магазин для живого общения</h1>
+      <h1 class="hero-title">Магазин для живого общения</h1>
       <p class="hero-subtitle">
-        BoardGame Hub помогает собираться за одним столом без лишнего визуального шума:
-        только продуманные игры, чистый дизайн и понятные правила.
+        BoardGame Hub — это онлайн‑витрина отобранных настольных игр для тех, кто ценит
+        тишину вокруг стола и громкий смех друзей. Вместо сотен случайных позиций мы
+        собрали короткий список игр, которые реально раскладывают каждый месяц, а не пылятся на полке.
+      </p>
+      <p class="hero-subtitle">
+        Выберите игру для уютного вечера вдвоём, шумной вечеринки или семейного праздника —
+        в каталоге уже есть всё, что нужно: от стратегий до простых семейных игр, понятных с первого хода.
       </p>
 
+      <!-- Кнопки призыва к действию -->
       <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
         <a href="catalog.html" class="btn-primary-min">Открыть каталог</a>
         <a href="order.html" class="btn-ghost-link">Быстрый заказ</a>
       </div>
 
-      <!-- Внутренняя навигация по странице -->
+      <!-- Внутренняя навигация по этой странице (якоря) -->
       <nav class="mb-3">
         <span class="page-kicker me-2" style="font-size:0.7rem;">Навигация:</span>
-        <a class="btn-ghost-link me-2" href="#section1">Раздел 1</a>
-        <a class="btn-ghost-link me-2" href="#section2">Раздел 2</a>
+        <a class="btn-ghost-link me-2" href="#section1">Зачем играть в настолки</a>
+        <a class="btn-ghost-link me-2" href="#section2">Жанры без личного шума</a>
         <a class="btn-ghost-link" href="#top">К началу</a>
       </nav>
     </div>
 
+    <!-- Правая колонка: изображение с подписью -->
     <div class="col-lg-6">
       <div class="hero-card">
-        <img src="https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg"
+        <img src="images/main1.jpg"
              alt="Настольная игра на столе">
         <p class="hero-note">
           Минималистичное пространство стола без лишних деталей помогает сосредоточиться
-          на общении и принятии решений.
+          на общении, принятии решений и живых реакциях, а не на визуальном шуме.
         </p>
       </div>
     </div>
   </div>
 </main>
 
+<!-- ======== РАЗДЕЛ 1: Зачем играть в настолки ======== -->
 <section id="section1" class="container mb-5">
   <h2 class="section-title">Зачем играть в настолки</h2>
   <div class="row g-3">
     <div class="col-md-6">
       <div class="info-card">
-        Настольные игры развивают внимание, память и гибкость мышления, а ещё создают
-        безопасное пространство для тренировки общения в реальном времени.
+        Настольные игры — это простой способ выключить экраны и включить людей. Они
+        развивают внимание, память и гибкость мышления, но главное — возвращают живое
+        общение за один стол. Даже одна игра в неделю уже превращает обычный вечер
+        в маленькое событие, которого ждут и взрослые, и дети.
       </div>
     </div>
     <div class="col-md-6">
       <div class="info-card">
-        Минималистичный подход к выбору игр означает отсутствие случайных покупок:
-        только те коробки, которые действительно будут лежать на столе, а не на полке.
+        В BoardGame Hub вы не тонете в выборе: мы тестируем игры сами и оставляем только
+        те коробки, которые легко объяснить гостям и быстро достать «по первому требованию».
+        Вы получаете аккуратный набор проверенных настолок для любых сценариев —
+        от пятничного вечера до новогоднего марафона.
       </div>
     </div>
   </div>
 </section>
 
+<!-- ======== РАЗДЕЛ 2: Жанры без лишнего шума ======== -->
 <section id="section2" class="container mb-4">
   <h2 class="section-title">Жанры без лишнего шума</h2>
   <div class="row g-3">
     <div class="col-sm-6 col-lg-3">
       <div class="info-card">
-        Стратегии: несколько ключевых решений в ход, минимум лишних правил.
+        Стратегии: несколько ключевых решений в ход, минимум лишних правил. Идеально,
+        если вы любите просчитывать ходы, но не хотите тратить вечер на изучение
+        40‑страничного правила.
       </div>
     </div>
     <div class="col-sm-6 col-lg-3">
       <div class="info-card">
-        Семейные игры: простые иконки, крупные компоненты, короткие партии.
+        Семейные игры: крупные компоненты, понятные иконки и партии на 20–40 минут.
+        Такие игры легко объяснить родителям, бабушкам и школьникам — никто не останется
+        «зрителем», все участвуют в процессе.
       </div>
     </div>
     <div class="col-sm-6 col-lg-3">
       <div class="info-card">
-        Кооперативы: совместное планирование без токсичной конкуренции.
+        Кооперативы: вы играете не против друг друга, а вместе против игры. Подойдут
+        для команд, где важна поддержка и совместные решения, а не токсичная конкуренция.
       </div>
     </div>
     <div class="col-sm-6 col-lg-3">
       <div class="info-card">
-        Пати-форматы: акцент на эмоции и шутки, а не на подсчёт очков.
+        Пати‑игры: минимум правил, максимум эмоций и шуток. Это лучший формат, чтобы
+        «разогреть» большую компанию, познакомить людей между собой и создать ощущение
+        настоящей вечеринки.
       </div>
     </div>
   </div>
@@ -277,11 +352,13 @@
   </p>
 </section>
 
+<!-- ======== ФУТЕР ======== -->
 <footer class="site-footer">
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
     <div>
       <div class="page-kicker mb-1">BoardGame Hub</div>
       <div>Минималистичный магазин настольных игр, 2025.</div>
+      <div>Подбираем настолки, которые действительно играют, а не просто занимают место.</div>
     </div>
     <div class="footer-right">
       <span>email: info@boardgame-hub.example</span>
@@ -291,6 +368,7 @@
   </div>
 </footer>
 
+<!-- Подключение JS Bootstrap (для меню и т.п.) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

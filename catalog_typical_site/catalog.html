@@ -4,34 +4,38 @@
   <meta charset="UTF-8">
   <title>Настольные игры — Каталог</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Подключаем Bootstrap 5 -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
   >
   <style>
+    /* ========= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ========= */
     :root {
-      --bg-main: #f5f5f7;
-      --bg-card: #ffffff;
-      --accent: #111827;
-      --accent-soft: #e5e7eb;
-      --accent-blue: #2563eb;
-      --text-main: #111827;
-      --text-muted: #6b7280;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --bg-main: #f5f5f7;         /* Основной фон сайта */
+      --bg-card: #ffffff;         /* Фон карточек товаров */
+      --accent: #111827;          /* Тёмный акцентный цвет */
+      --accent-soft: #e5e7eb;     /* Серый для границ и фонов */
+      --accent-blue: #2563eb;     /* Синий акцент для ссылок и наведения */
+      --text-main: #111827;       /* Основной цвет текста */
+      --text-muted: #6b7280;      /* Второстепенный текст */
+      --radius-lg: 18px;          /* Скругления карточек */
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08); /* Мягкая тень */
     }
 
     * { box-sizing: border-box; }
 
     body {
-      padding-top: 72px;
+      padding-top: 72px;              /* Отступ под фиксированное меню */
       background-color: var(--bg-main);
       color: var(--text-main);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
       letter-spacing: 0.01em;
+      line-height: 1.55;
     }
 
+    /* ========= НАВИГАЦИЯ ========= */
     .navbar {
       background: rgba(15, 23, 42, 0.9) !important;
       backdrop-filter: blur(14px);
@@ -68,6 +72,7 @@
       background: linear-gradient(90deg, #38bdf8, #6366f1, #ec4899);
     }
 
+    /* ========= ИНДИКАТОР КОРЗИНЫ В ШАПКЕ ========= */
     .cart-button {
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.85);
@@ -88,8 +93,21 @@
       box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.18);
     }
 
-    main {
-      max-width: 1120px;
+    /* ========= КОНТЕЙНЕРЫ И МОБИЛЬНЫЕ ОТСТУПЫ ========= */
+    main,
+    section,
+    footer .container {
+      max-width: 1120px; /* Ширина «контента» по центру */
+    }
+
+    /* Дополнительные отступы по краям на мобильных,
+       чтобы текст не прилипал к экрану */
+    @media (max-width: 576px) {
+      main,
+      section,
+      footer .container {
+        padding-inline: 1.25rem;
+      }
     }
 
     .page-header {
@@ -129,7 +147,7 @@
     }
 
     section {
-      scroll-margin-top: 96px;
+      scroll-margin-top: 96px; /* чтобы заголовки по якорю не скрывал шапка */
     }
 
     .section-title {
@@ -140,6 +158,7 @@
       margin-bottom: 1.25rem;
     }
 
+    /* ========= КАРТОЧКИ ТОВАРОВ ========= */
     .product-card {
       background-color: var(--bg-card);
       border-radius: var(--radius-lg);
@@ -210,57 +229,7 @@
       color: var(--accent-blue);
     }
 
-    footer.site-footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 1.5rem 0 1.25rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      background-color: #f9fafb;
-      margin-top: 3rem;
-    }
-
-    footer .footer-right {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Offcanvas / корзина */
-    .offcanvas-cart {
-      width: min(420px, 100vw);
-      background-color: #f9fafb;
-    }
-
-    .cart-item {
-      font-size: 0.88rem;
-      border-bottom: 1px solid rgba(209, 213, 219, 0.7);
-      padding: 0.6rem 0;
-    }
-
-    .cart-item-title {
-      font-weight: 500;
-    }
-
-    .cart-summary {
-      font-size: 0.9rem;
-    }
-
-    .cart-qty-input {
-      width: 64px;
-      padding-inline: 0.5rem;
-      font-size: 0.85rem;
-    }
-
+    /* ========= ФОРМЫ В КОРЗИНЕ (offcanvas) ========= */
     .form-label {
       font-size: 0.86rem;
       color: var(--text-main);
@@ -304,6 +273,59 @@
       background: #000000;
     }
 
+    /* ========= OFFCANVAS КОРЗИНЫ ========= */
+    .offcanvas-cart {
+      width: min(420px, 100vw);
+      background-color: #f9fafb;
+    }
+
+    .cart-item {
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(209, 213, 219, 0.7);
+      padding: 0.6rem 0;
+    }
+
+    .cart-item-title {
+      font-weight: 500;
+    }
+
+    .cart-summary {
+      font-size: 0.9rem;
+    }
+
+    .cart-qty-input {
+      width: 64px;
+      padding-inline: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    /* ========= ФУТЕР ========= */
+    footer.site-footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 0 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background-color: #f9fafb;
+      margin-top: 3rem;
+    }
+
+    footer .footer-right {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========= МЕЛКАЯ АДАПТАЦИЯ КАРТОЧЕК ПОД МОБИЛЬНЫЕ ========= */
     @media (max-width: 575.98px) {
       .card-body {
         padding: 1rem 0.95rem 1rem;
@@ -316,6 +338,7 @@
 </head>
 <body id="top">
 
+<!-- ======== НАВИГАЦИЯ С ССЫЛКОЙ НА КОРЗИНУ ======== -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="index.html">BoardGame Hub</a>
@@ -339,6 +362,7 @@
           <a class="nav-link" href="order.html">Заказ</a>
         </li>
         <li class="nav-item">
+          <!-- Кнопка открытия offcanvas-корзины -->
           <button
             class="cart-button"
             type="button"
@@ -355,52 +379,76 @@
   </div>
 </nav>
 
+<!-- ======== ОСНОВНОЙ КОНТЕНТ КАТАЛОГА ======== -->
 <main class="container my-3">
   <header class="page-header">
     <p class="page-kicker mb-2">Каталог</p>
     <h1 class="page-title">Настольные игры без визуального шума</h1>
     <p class="page-subtitle">
-      Нажмите «в корзину» у понравившихся игр. После этого откройте корзину справа,
-      проверьте количество и сразу же оформите заказ.
+      Мы собрали короткий, но содержательный каталог: только те игры, в которые мы сами
+      готовы играть вечером после работы. Выберите понравившиеся, нажмите «в корзину»,
+      откройте корзину справа и оформите заказ — без лишних экранов и отвлекающих элементов.
     </p>
   </header>
 
+  <!-- Внутренняя навигация по разделам каталога -->
   <nav class="page-nav mb-4">
     <span class="page-kicker me-2" style="font-size:0.7rem;">Навигация:</span>
-    <a class="me-1" href="#section-popular">Раздел 1</a>
-    <a class="me-1" href="#section-family">Раздел 2</a>
+    <a class="me-1" href="#section-popular">Популярные игры</a>
+    <a class="me-1" href="#section-family">Семейные наборы</a>
     <a href="#top">К началу</a>
   </nav>
 
+  <!-- Раздел 1: Популярные игры -->
   <section id="section-popular" class="mb-5">
     <h2 class="section-title">Популярные игры</h2>
+    <p class="page-subtitle mb-3">
+      Эти игры чаще всего становятся первой покупкой наших гостей. Они достаточно
+      просты, чтобы объяснить правила за 10 минут, и достаточно глубоки, чтобы
+      захотеть сыграть ещё раз. Хороший выбор, если вы только начинаете собирать
+      свою «рабочую» полку настолок.
+    </p>
     <div id="product-grid" class="row g-4">
-      <!-- Карточки добавятся скриптом -->
+      <!-- Карточки товаров добавятся сюда из JavaScript -->
     </div>
   </section>
 
+  <!-- Раздел 2: Семейные наборы -->
   <section id="section-family" class="mb-4">
     <h2 class="section-title">Семейные наборы</h2>
     <div class="row align-items-center g-3">
       <div class="col-md-6">
+        <p class="page-subtitle">
+          Семейные комплекты - это не просто ещё одна коробка на полке. Это продуманные
+          наборы, в которых базовая игра и дополнения подобраны так, чтобы всем было
+          интересно: детям, родителям и друзьям, зашедшим «на одну партию».
+        </p>
+        <ul class="small-hint mb-2" style="list-style:none; padding-left:0;">
+          <li>• Партии по 20–40 минут - дети не успевают устать.</li>
+          <li>• Правила, которые можно объяснить за пару примеров.</li>
+          <li>• Крупные, читаемые компоненты без визуального шума.</li>
+          <li>• Сценарии для разных компаний: вдвоём, впятером или всей семьёй.</li>
+        </ul>
         <p class="page-subtitle mb-0">
-          Семейные комплекты включают базовую игру и дополнения, подобранные под разные
-          возрастные группы, чтобы за одним столом было комфортно всем.
+          В комментарии к заказу напишите возраст игроков и повод (семейный вечер,
+          день рождения, праздник) - мы предложим конкретный семейный набор и соберём
+          для вас посылку так, чтобы за столом не было «лишних» игр.
         </p>
       </div>
       <div class="col-md-6">
         <figure class="mb-0">
-          <img src="https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg"
+          <img src="images/family.jpg"
                alt="Семья за столом с настольной игрой"
                class="img-fluid rounded-4 shadow-sm">
           <figcaption class="mt-2" style="font-size:0.8rem;color:var(--text-muted);">
-            Минимум визуального шума, максимум общения за столом.
+            Одна коробка, один стол и вечер, который запомнится не только детям, но и взрослым.
           </figcaption>
         </figure>
       </div>
     </div>
   </section>
 
+  <!-- Кнопка «к началу» и быстрый доступ к корзине -->
   <div class="d-flex justify-content-between align-items-center mt-3">
     <a href="#top" class="btn-ghost-link">К началу страницы</a>
     <button
@@ -415,11 +463,13 @@
   </div>
 </main>
 
+<!-- ======== ФУТЕР ======== -->
 <footer class="site-footer">
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
     <div>
       <div class="page-kicker mb-1">BoardGame Hub</div>
       <div>Минималистичный магазин настольных игр, 2025.</div>
+      <div>Мы убираем лишние игры из списка, чтобы вам было проще выбирать лучшее.</div>
     </div>
     <div class="footer-right">
       <span>email: sales@boardgame-hub.example</span>
@@ -429,17 +479,20 @@
   </div>
 </footer>
 
-<!-- Offcanvas корзины -->
+<!-- ======== OFFCANVAS: КОРЗИНА + ФОРМА ЗАКАЗА ======== -->
 <div class="offcanvas offcanvas-end offcanvas-cart" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
   <div class="offcanvas-header">
     <div>
       <h5 class="offcanvas-title" id="cartOffcanvasLabel">Корзина</h5>
-      <p class="small-hint mb-0">Проверьте состав заказа, отредактируйте количество и заполните данные ниже.</p>
+      <p class="small-hint mb-0">
+        Здесь собраны выбранные вами игры. Проверьте состав, при необходимости
+        отредактируйте количество и заполните форму ниже.
+      </p>
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
   </div>
   <div class="offcanvas-body d-flex flex-column">
-    <!-- Список товаров -->
+    <!-- Список товаров в корзине заполняется JS -->
     <div id="cart-items"></div>
 
     <div class="mt-2 mb-3 cart-summary">
@@ -453,13 +506,14 @@
       </div>
     </div>
 
-    <!-- Форма заказа внутри offcanvas -->
+    <!-- Форма заказа внутри offcanvas (минимальная, но рабочая) -->
     <form
       id="cart-order-form"
       class="mt-auto"
       action="https://httpbin.org/post"
       method="post"
     >
+      <!-- В это поле перед отправкой положим JSON‑корзину -->
       <input type="hidden" name="cart_json" id="cart-json">
 
       <div class="mb-2">
@@ -469,7 +523,7 @@
           class="form-control"
           id="customerName"
           name="customer_name"
-          placeholder="Например, Иван Петров"
+          placeholder="Например, Анна Смирнова"
           required
         >
       </div>
@@ -559,7 +613,7 @@
           id="customerComment"
           name="customer_comment"
           rows="3"
-          placeholder="Дополнительные пожелания, удобное время звонка и т.п."
+          placeholder="Напишите, для кого вы выбираете игры (возраст, опыт, повод) — это поможет нам лучше вас проконсультировать."
         ></textarea>
       </div>
 
@@ -570,7 +624,7 @@
   </div>
 </div>
 
-<!-- Шаблон карточки товара -->
+<!-- Шаблон карточки товара, который клонируется в JS -->
 <template id="product-template">
   <div class="col-sm-6 col-lg-4 col-xl-3">
     <article class="card h-100 product-card">
@@ -589,74 +643,78 @@
   </div>
 </template>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-  // Данные товаров
+  /* ========= ДАННЫЕ ТОВАРОВ ========= */
   const products = [
     {
       id: 'catan',
       title: 'Колонизаторы',
-      description: 'Классическая стратегия про развитие и торговлю на острове.',
+      description: 'Классическая стратегия про развитие и торговлю на острове. Отличный выбор для тех, кто любит планировать и договариваться.',
       price: 3200,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/colonisator.jpg'
     },
     {
       id: 'carcassonne',
       title: 'Каркассон',
-      description: 'Постройте карту средневековой Франции из квадратных тайлов.',
+      description: 'Постройте карту средневековой Франции из квадратных тайлов. Простые правила и много приятных решений.',
       price: 2900,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/karkason.jpg'
     },
     {
       id: 'imaginarium',
       title: 'Имаджинариум',
-      description: 'Ассоциативные карты и творческие объяснения для компании.',
+      description: 'Ассоциативные карты и творческие объяснения для компании. Подходит для любителей фантазировать и рассказывать истории.',
       price: 2500,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/imaginarium.jpg'
     },
     {
       id: 'munchkin',
       title: 'Манчкин',
-      description: 'Фэнтези-подземелья с юмором и подставами.',
+      description: 'Фэнтези-подземелья с юмором и подставами. Веселая игра, где главное — не воспринимать происходящее слишком серьёзно.',
       price: 2100,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/munchkin.jpg'
     },
     {
       id: 'alias',
       title: 'Alias',
-      description: 'Объясняйте слова, не используя однокоренные.',
+      description: 'Объясняйте слова, не используя однокоренные. Лёгкая игра на скорость и смекалку для больших компаний.',
       price: 1800,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/alias.jpg'
     },
     {
       id: 'codenames',
       title: 'Кодовые имена',
-      description: 'Командная игра на ассоциации и риск.',
+      description: 'Командная игра на ассоциации и риск. Отлично подходит, чтобы проверить, насколько хорошо вы понимаете своих друзей.',
       price: 2400,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/codenames.jpg'
     },
     {
       id: 'ticket-to-ride',
       title: 'Ticket to Ride',
-      description: 'Строительство железных дорог по миру.',
+      description: 'Строительство железных дорог по миру. Интуитивная, визуально приятная игра для семьи и друзей.',
       price: 3900,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/ticket_to_ride.jpg'
     },
     {
       id: 'dixit',
       title: 'Диксит',
-      description: 'Игра на воображение с минималистичным артом.',
+      description: 'Игра на воображение с минималистичным артом. Отличный способ узнать своих друзей с новой стороны.',
       price: 3100,
-      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+      image: 'images/dixit.jpg'
     }
   ];
 
+  // Быстрый доступ к товарам по id: productMap['catan'] -> объект игры
   const productMap = Object.fromEntries(products.map(p => [p.id, p]));
 
-  // Простая корзина в localStorage
+  /* ========= КОРЗИНА В localStorage ========= */
   const CART_KEY = 'boardgame_cart';
   let cart = {};
 
+  // Читаем корзину из localStorage
   function loadCart() {
     try {
       const raw = localStorage.getItem(CART_KEY);
@@ -669,11 +727,13 @@
     updateCartUI();
   }
 
+  // Сохраняем корзину в localStorage
   function saveCart() {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
     updateCartUI();
   }
 
+  // Добавляем товар в корзину
   function addToCart(productId) {
     if (!cart[productId]) {
       cart[productId] = 0;
@@ -682,6 +742,7 @@
     saveCart();
   }
 
+  // Меняем количество товара в корзине
   function changeQty(productId, newQty) {
     const qty = Math.max(0, parseInt(newQty, 10) || 0);
     if (qty === 0) {
@@ -692,15 +753,18 @@
     saveCart();
   }
 
+  // Удаляем товар из корзины
   function removeFromCart(productId) {
     delete cart[productId];
     saveCart();
   }
 
+  // Общее количество единиц товара в корзине
   function getCartItemsCount() {
     return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
   }
 
+  // Итоговая сумма корзины
   function getCartTotal() {
     let total = 0;
     for (const [id, qty] of Object.entries(cart)) {
@@ -712,6 +776,7 @@
     return total;
   }
 
+  // Обновляем отображение корзины (шапка + offcanvas)
   function updateCartUI() {
     const countEl = document.getElementById('cart-count');
     const itemsEl = document.getElementById('cart-items');
@@ -736,6 +801,7 @@
     entries.forEach(([id, qty]) => {
       const p = productMap[id];
       if (!p) return;
+
       const row = document.createElement('div');
       row.className = 'cart-item d-flex align-items-center justify-content-between gap-2';
 
@@ -760,7 +826,7 @@
     });
   }
 
-  // Отрисовка каталога
+  // Отрисовываем карточки товаров в каталоге
   const template = document.getElementById('product-template');
   const grid = document.getElementById('product-grid');
 
@@ -783,7 +849,7 @@
     grid.appendChild(clone);
   });
 
-  // Перед отправкой формы отправляем состав корзины в скрытое поле cart_json
+  // Перед отправкой формы прикладываем JSON‑корзины
   const orderForm = document.getElementById('cart-order-form');
   if (orderForm) {
     orderForm.addEventListener('submit', () => {
@@ -794,6 +860,7 @@
     });
   }
 
+  // Инициализация корзины при загрузке страницы
   loadCart();
 </script>
 </body>
