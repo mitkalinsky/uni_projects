@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Настольные игры — Каталог</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  >
+  <style>
+    :root {
+      --bg-main: #f5f5f7;
+      --bg-card: #ffffff;
+      --accent: #111827;
+      --accent-soft: #e5e7eb;
+      --accent-blue: #2563eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      padding-top: 72px;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .navbar {
+      background: rgba(15, 23, 42, 0.9) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(229, 231, 235, 0.8) !important;
+    }
+
+    .nav-link.active {
+      color: #f9fafb !important;
+      position: relative;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      inset-inline: 18%;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #6366f1, #ec4899);
+    }
+
+    .cart-button {
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #e5e7eb;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .cart-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.18);
+    }
+
+    main {
+      max-width: 1120px;
+    }
+
+    .page-header {
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .page-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-subtitle {
+      max-width: 540px;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+    }
+
+    nav.page-nav a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav.page-nav a:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    section {
+      scroll-margin-top: 96px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease, translate 0.18s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(129, 140, 248, 0.85);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+    }
+
+    .product-card img {
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.15rem 1.1rem 1.15rem;
+    }
+
+    .product-title {
+      font-size: 0.98rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-description {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .product-price {
+      font-size: 0.98rem;
+    }
+
+    .btn-minimal {
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.55rem 1.25rem;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: #fff;
+      color: var(--accent);
+    }
+
+    .btn-minimal:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      background: #eff6ff;
+    }
+
+    .btn-ghost-link {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .btn-ghost-link:hover {
+      color: var(--accent-blue);
+    }
+
+    footer.site-footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 0 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background-color: #f9fafb;
+      margin-top: 3rem;
+    }
+
+    footer .footer-right {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Offcanvas / корзина */
+    .offcanvas-cart {
+      width: min(420px, 100vw);
+      background-color: #f9fafb;
+    }
+
+    .cart-item {
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(209, 213, 219, 0.7);
+      padding: 0.6rem 0;
+    }
+
+    .cart-item-title {
+      font-weight: 500;
+    }
+
+    .cart-summary {
+      font-size: 0.9rem;
+    }
+
+    .cart-qty-input {
+      width: 64px;
+      padding-inline: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .form-label {
+      font-size: 0.86rem;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 999px;
+      border-color: rgba(209, 213, 219, 0.9);
+      font-size: 0.9rem;
+      padding-inline: 1rem;
+    }
+
+    textarea.form-control {
+      border-radius: 1rem;
+      min-height: 80px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .small-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .btn-primary-min {
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.55rem 1.4rem;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .btn-primary-min:hover {
+      background: #000000;
+    }
+
+    @media (max-width: 575.98px) {
+      .card-body {
+        padding: 1rem 0.95rem 1rem;
+      }
+      .product-card img {
+        height: 170px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">BoardGame Hub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav"
+            aria-expanded="false" aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">О нас</a>
+        </li>
+        <li class="nav-item me-lg-2">
+          <a class="nav-link" href="order.html">Заказ</a>
+        </li>
+        <li class="nav-item">
+          <button
+            class="cart-button"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#cartOffcanvas"
+            aria-controls="cartOffcanvas"
+          >
+            <span class="cart-dot"></span>
+            <span>Корзина: <span id="cart-count">0</span></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-3">
+  <header class="page-header">
+    <p class="page-kicker mb-2">Каталог</p>
+    <h1 class="page-title">Настольные игры без визуального шума</h1>
+    <p class="page-subtitle">
+      Нажмите «в корзину» у понравившихся игр. После этого откройте корзину справа,
+      проверьте количество и сразу же оформите заказ.
+    </p>
+  </header>
+
+  <nav class="page-nav mb-4">
+    <span class="page-kicker me-2" style="font-size:0.7rem;">Навигация:</span>
+    <a class="me-1" href="#section-popular">Раздел 1</a>
+    <a class="me-1" href="#section-family">Раздел 2</a>
+    <a href="#top">К началу</a>
+  </nav>
+
+  <section id="section-popular" class="mb-5">
+    <h2 class="section-title">Популярные игры</h2>
+    <div id="product-grid" class="row g-4">
+      <!-- Карточки добавятся скриптом -->
+    </div>
+  </section>
+
+  <section id="section-family" class="mb-4">
+    <h2 class="section-title">Семейные наборы</h2>
+    <div class="row align-items-center g-3">
+      <div class="col-md-6">
+        <p class="page-subtitle mb-0">
+          Семейные комплекты включают базовую игру и дополнения, подобранные под разные
+          возрастные группы, чтобы за одним столом было комфортно всем.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <figure class="mb-0">
+          <img src="https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg"
+               alt="Семья за столом с настольной игрой"
+               class="img-fluid rounded-4 shadow-sm">
+          <figcaption class="mt-2" style="font-size:0.8rem;color:var(--text-muted);">
+            Минимум визуального шума, максимум общения за столом.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <a href="#top" class="btn-ghost-link">К началу страницы</a>
+    <button
+      class="btn-minimal"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#cartOffcanvas"
+      aria-controls="cartOffcanvas"
+    >
+      Открыть корзину
+    </button>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
+    <div>
+      <div class="page-kicker mb-1">BoardGame Hub</div>
+      <div>Минималистичный магазин настольных игр, 2025.</div>
+    </div>
+    <div class="footer-right">
+      <span>email: sales@boardgame-hub.example</span>
+      <a href="about.html">О магазине</a>
+      <a href="order.html">Помощь с заказом</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Offcanvas корзины -->
+<div class="offcanvas offcanvas-end offcanvas-cart" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+  <div class="offcanvas-header">
+    <div>
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel">Корзина</h5>
+      <p class="small-hint mb-0">Проверьте состав заказа, отредактируйте количество и заполните данные ниже.</p>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <!-- Список товаров -->
+    <div id="cart-items"></div>
+
+    <div class="mt-2 mb-3 cart-summary">
+      <div class="d-flex justify-content-between">
+        <span>Всего позиций:</span>
+        <span id="cart-items-count">0</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Сумма заказа:</span>
+        <span id="cart-total">0 ₽</span>
+      </div>
+    </div>
+
+    <!-- Форма заказа внутри offcanvas -->
+    <form
+      id="cart-order-form"
+      class="mt-auto"
+      action="https://httpbin.org/post"
+      method="post"
+    >
+      <input type="hidden" name="cart_json" id="cart-json">
+
+      <div class="mb-2">
+        <label for="customerName" class="form-label">Имя и фамилия *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerName"
+          name="customer_name"
+          placeholder="Например, Иван Петров"
+          required
+        >
+      </div>
+
+      <div class="mb-2">
+        <label for="customerEmail" class="form-label">Электронная почта *</label>
+        <input
+          type="email"
+          class="form-control"
+          id="customerEmail"
+          name="customer_email"
+          placeholder="example@mail.ru"
+          required
+        >
+      </div>
+
+      <div class="mb-2">
+        <label for="customerPhone" class="form-label">Телефон *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerPhone"
+          name="customer_phone"
+          placeholder="+7 900 000-00-00"
+          required
+        >
+      </div>
+
+      <fieldset class="mb-2">
+        <legend class="form-label mb-1" style="font-size:0.86rem;">Способ доставки *</legend>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="delivery_type"
+            id="deliveryPickup"
+            value="pickup"
+            required
+          >
+          <label class="form-check-label" for="deliveryPickup">
+            Самовывоз из магазина
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="delivery_type"
+            id="deliveryCourier"
+            value="courier"
+          >
+          <label class="form-check-label" for="deliveryCourier">
+            Курьер по городу
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="delivery_type"
+            id="deliveryPost"
+            value="post"
+          >
+          <label class="form-check-label" for="deliveryPost">
+            Доставка почтой
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="mb-2">
+        <label for="deliveryAddress" class="form-label">
+          Адрес доставки (если выбрана доставка)
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="deliveryAddress"
+          name="delivery_address"
+          placeholder="Город, улица, дом, квартира"
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="customerComment" class="form-label">Комментарий к заказу</label>
+        <textarea
+          class="form-control"
+          id="customerComment"
+          name="customer_comment"
+          rows="3"
+          placeholder="Дополнительные пожелания, удобное время звонка и т.п."
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary-min w-100">
+        Оформить заказ
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Шаблон карточки товара -->
+<template id="product-template">
+  <div class="col-sm-6 col-lg-4 col-xl-3">
+    <article class="card h-100 product-card">
+      <img class="card-img-top product-image" src="" alt="">
+      <div class="card-body d-flex flex-column">
+        <h3 class="product-title"></h3>
+        <p class="product-description"></p>
+        <p class="fw-semibold mb-3">
+          Цена: <span class="product-price"></span> ₽
+        </p>
+        <button type="button" class="btn-minimal mt-auto add-to-cart">
+          В корзину
+        </button>
+      </div>
+    </article>
+  </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Данные товаров
+  const products = [
+    {
+      id: 'catan',
+      title: 'Колонизаторы',
+      description: 'Классическая стратегия про развитие и торговлю на острове.',
+      price: 3200,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'carcassonne',
+      title: 'Каркассон',
+      description: 'Постройте карту средневековой Франции из квадратных тайлов.',
+      price: 2900,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'imaginarium',
+      title: 'Имаджинариум',
+      description: 'Ассоциативные карты и творческие объяснения для компании.',
+      price: 2500,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'munchkin',
+      title: 'Манчкин',
+      description: 'Фэнтези-подземелья с юмором и подставами.',
+      price: 2100,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'alias',
+      title: 'Alias',
+      description: 'Объясняйте слова, не используя однокоренные.',
+      price: 1800,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'codenames',
+      title: 'Кодовые имена',
+      description: 'Командная игра на ассоциации и риск.',
+      price: 2400,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'ticket-to-ride',
+      title: 'Ticket to Ride',
+      description: 'Строительство железных дорог по миру.',
+      price: 3900,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    },
+    {
+      id: 'dixit',
+      title: 'Диксит',
+      description: 'Игра на воображение с минималистичным артом.',
+      price: 3100,
+      image: 'https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg'
+    }
+  ];
+
+  const productMap = Object.fromEntries(products.map(p => [p.id, p]));
+
+  // Простая корзина в localStorage
+  const CART_KEY = 'boardgame_cart';
+  let cart = {};
+
+  function loadCart() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      if (raw) {
+        cart = JSON.parse(raw);
+      }
+    } catch (e) {
+      cart = {};
+    }
+    updateCartUI();
+  }
+
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartUI();
+  }
+
+  function addToCart(productId) {
+    if (!cart[productId]) {
+      cart[productId] = 0;
+    }
+    cart[productId] += 1;
+    saveCart();
+  }
+
+  function changeQty(productId, newQty) {
+    const qty = Math.max(0, parseInt(newQty, 10) || 0);
+    if (qty === 0) {
+      delete cart[productId];
+    } else {
+      cart[productId] = qty;
+    }
+    saveCart();
+  }
+
+  function removeFromCart(productId) {
+    delete cart[productId];
+    saveCart();
+  }
+
+  function getCartItemsCount() {
+    return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+  }
+
+  function getCartTotal() {
+    let total = 0;
+    for (const [id, qty] of Object.entries(cart)) {
+      const p = productMap[id];
+      if (p) {
+        total += p.price * qty;
+      }
+    }
+    return total;
+  }
+
+  function updateCartUI() {
+    const countEl = document.getElementById('cart-count');
+    const itemsEl = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    const itemsCountEl = document.getElementById('cart-items-count');
+
+    if (countEl) countEl.textContent = getCartItemsCount();
+    if (totalEl) totalEl.textContent = getCartTotal() + ' ₽';
+
+    if (!itemsEl) return;
+    itemsEl.innerHTML = '';
+
+    const entries = Object.entries(cart);
+    if (entries.length === 0) {
+      itemsEl.innerHTML = '<p class="small-hint mb-2">Корзина пуста. Добавьте игры из каталога.</p>';
+      if (itemsCountEl) itemsCountEl.textContent = '0';
+      return;
+    }
+
+    if (itemsCountEl) itemsCountEl.textContent = entries.length.toString();
+
+    entries.forEach(([id, qty]) => {
+      const p = productMap[id];
+      if (!p) return;
+      const row = document.createElement('div');
+      row.className = 'cart-item d-flex align-items-center justify-content-between gap-2';
+
+      row.innerHTML = `
+        <div class="flex-grow-1">
+          <div class="cart-item-title">${p.title}</div>
+          <div class="small-hint">Цена: ${p.price} ₽</div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <input type="number" min="0" class="form-control cart-qty-input" value="${qty}">
+          <button type="button" class="btn btn-sm btn-outline-secondary border-0 text-muted remove-btn">×</button>
+        </div>
+      `;
+
+      const qtyInput = row.querySelector('input');
+      qtyInput.addEventListener('change', () => changeQty(id, qtyInput.value));
+
+      const removeBtn = row.querySelector('.remove-btn');
+      removeBtn.addEventListener('click', () => removeFromCart(id));
+
+      itemsEl.appendChild(row);
+    });
+  }
+
+  // Отрисовка каталога
+  const template = document.getElementById('product-template');
+  const grid = document.getElementById('product-grid');
+
+  products.forEach(game => {
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('.product-title').textContent = game.title;
+    clone.querySelector('.product-description').textContent = game.description;
+    clone.querySelector('.product-price').textContent = game.price.toString();
+    const img = clone.querySelector('.product-image');
+    img.src = game.image;
+    img.alt = game.title;
+
+    const btn = clone.querySelector('.add-to-cart');
+    btn.dataset.productId = game.id;
+    btn.addEventListener('click', () => {
+      addToCart(game.id);
+      btn.textContent = 'В корзине';
+      setTimeout(() => (btn.textContent = 'В корзину'), 1200);
+    });
+    grid.appendChild(clone);
+  });
+
+  // Перед отправкой формы отправляем состав корзины в скрытое поле cart_json
+  const orderForm = document.getElementById('cart-order-form');
+  if (orderForm) {
+    orderForm.addEventListener('submit', () => {
+      const hidden = document.getElementById('cart-json');
+      if (hidden) {
+        hidden.value = JSON.stringify(cart);
+      }
+    });
+  }
+
+  loadCart();
+</script>
+</body>
+</html>

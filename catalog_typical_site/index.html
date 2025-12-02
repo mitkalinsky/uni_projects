@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>BoardGame Hub — Главная</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  >
+  <style>
+    :root {
+      --bg-main: #f5f5f7;
+      --bg-card: #ffffff;
+      --accent: #111827;
+      --accent-soft: #e5e7eb;
+      --accent-blue: #2563eb;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      padding-top: 72px;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      letter-spacing: 0.01em;
+    }
+    .navbar {
+      background: rgba(15, 23, 42, 0.9) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(229, 231, 235, 0.8) !important;
+    }
+    .nav-link.active {
+      color: #f9fafb !important;
+      position: relative;
+    }
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      inset-inline: 18%;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #6366f1, #ec4899);
+    }
+    main {
+      max-width: 1120px;
+    }
+    .page-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .hero-wrap {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      padding: 2.5rem 0 3rem;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+    }
+    .hero-subtitle {
+      max-width: 460px;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-bottom: 1.6rem;
+    }
+    .btn-primary-min {
+      border-radius: 999px;
+      font-size: 0.83rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.65rem 1.6rem;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+    }
+    .btn-primary-min:hover {
+      background: #000000;
+    }
+    .btn-ghost-link {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .btn-ghost-link:hover { color: var(--accent-blue); }
+    .hero-card {
+      background-color: var(--bg-card);
+      border-radius: 24px;
+      border: 1px solid rgba(209, 213, 219, 0.8);
+      box-shadow: var(--shadow-soft);
+      padding: 1.2rem;
+    }
+    .hero-card img {
+      border-radius: 18px;
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+    section {
+      scroll-margin-top: 96px;
+    }
+    .section-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .info-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      padding: 1.2rem 1.3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    footer.site-footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 0 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background-color: #f9fafb;
+      margin-top: 3rem;
+    }
+    footer .footer-right {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body id="top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">BoardGame Hub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav"
+            aria-expanded="false" aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="catalog.html">Каталог</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">О нас</a>
+        </li>
+        <li class="nav-item me-lg-2">
+          <a class="nav-link" href="order.html">Заказ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container hero-wrap">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <p class="page-kicker mb-2">Настольные игры</p>
+      <h1 class="hero-title">Минималистичный магазин для живого общения</h1>
+      <p class="hero-subtitle">
+        BoardGame Hub помогает собираться за одним столом без лишнего визуального шума:
+        только продуманные игры, чистый дизайн и понятные правила.
+      </p>
+
+      <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+        <a href="catalog.html" class="btn-primary-min">Открыть каталог</a>
+        <a href="order.html" class="btn-ghost-link">Быстрый заказ</a>
+      </div>
+
+      <!-- Внутренняя навигация по странице -->
+      <nav class="mb-3">
+        <span class="page-kicker me-2" style="font-size:0.7rem;">Навигация:</span>
+        <a class="btn-ghost-link me-2" href="#section1">Раздел 1</a>
+        <a class="btn-ghost-link me-2" href="#section2">Раздел 2</a>
+        <a class="btn-ghost-link" href="#top">К началу</a>
+      </nav>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="hero-card">
+        <img src="https://images.pexels.com/photos/411207/pexels-photo-411207.jpeg"
+             alt="Настольная игра на столе">
+        <p class="hero-note">
+          Минималистичное пространство стола без лишних деталей помогает сосредоточиться
+          на общении и принятии решений.
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section id="section1" class="container mb-5">
+  <h2 class="section-title">Зачем играть в настолки</h2>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="info-card">
+        Настольные игры развивают внимание, память и гибкость мышления, а ещё создают
+        безопасное пространство для тренировки общения в реальном времени.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="info-card">
+        Минималистичный подход к выбору игр означает отсутствие случайных покупок:
+        только те коробки, которые действительно будут лежать на столе, а не на полке.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="section2" class="container mb-4">
+  <h2 class="section-title">Жанры без лишнего шума</h2>
+  <div class="row g-3">
+    <div class="col-sm-6 col-lg-3">
+      <div class="info-card">
+        Стратегии: несколько ключевых решений в ход, минимум лишних правил.
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="info-card">
+        Семейные игры: простые иконки, крупные компоненты, короткие партии.
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="info-card">
+        Кооперативы: совместное планирование без токсичной конкуренции.
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="info-card">
+        Пати-форматы: акцент на эмоции и шутки, а не на подсчёт очков.
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-3 d-flex justify-content-end">
+    <a href="#top" class="btn-ghost-link">К началу страницы</a>
+  </p>
+</section>
+
+<footer class="site-footer">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-start gap-2">
+    <div>
+      <div class="page-kicker mb-1">BoardGame Hub</div>
+      <div>Минималистичный магазин настольных игр, 2025.</div>
+    </div>
+    <div class="footer-right">
+      <span>email: info@boardgame-hub.example</span>
+      <a href="about.html">О магазине</a>
+      <a href="order.html">Поддержка</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
